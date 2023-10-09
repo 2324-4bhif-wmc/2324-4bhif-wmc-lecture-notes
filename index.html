@@ -452,6 +452,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_hü">2.2. HÜ</a></li>
 </ul>
 </li>
+<li><a href="#_2023_10_02_rest_resources_and_caching">3. 2023-10-02 REST - Resources and caching</a>
+<ul class="sectlevel2">
+<li><a href="#_cashing_explanation">3.1. Cashing Explanation</a></li>
+<li><a href="#_expires">3.2. Expires</a></li>
+<li><a href="#_e_tag_hashing">3.3. E-Tag Hashing</a></li>
+<li><a href="#_http_status_ranges_in_a_nutshell">3.4. HTTP status ranges in a nutshell</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -677,10 +685,175 @@ Internet für Prozesse und Maschinen
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2023_10_02_rest_resources_and_caching"><a class="anchor" href="#_2023_10_02_rest_resources_and_caching"></a>3. 2023-10-02 REST - Resources and caching</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_cashing_explanation"><a class="anchor" href="#_cashing_explanation"></a>3.1. Cashing Explanation</h3>
+<div class="sect3">
+<h4 id="_cashing"><a class="anchor" href="#_cashing"></a>3.1.1. Cashing</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Es gibt Server und Clients</p>
+</li>
+<li>
+<p>Jedes mal, wenn ein Client etwas benötigt, setzt er einen Request an den Server ab</p>
+</li>
+<li>
+<p>Da kann schon was zusammen kommen</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_browser"><a class="anchor" href="#_browser"></a>3.1.2. Browser</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>HTTP1.1 sagt: Jeder Browser darf nur maximal 2 Connections pro Webpage offen haben</p>
+</li>
+<li>
+<p>Chrome hat ein Limit von 6 pro remote- site und 10 über den gesamten Browser</p>
+</li>
+<li>
+<p>Wenn man da auf viele kleine Antworten wartet, dann kann das zu Verstopfungen führen</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_lösung"><a class="anchor" href="#_lösung"></a>3.1.3. Lösung</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ich (der Client) hole mir nicht immer das allerneueste Objekt vom Backend, sondern gebe mich mit einem etwas älteren zufrieden. (&#8594; weniger Requests)</p>
+</li>
+<li>
+<p>Der Server schickt nur ein neues Objekt, falls sich die Antwort seit der letzten Anfrage geändert hat (sonst nicht)</p>
+</li>
+<li>
+<p>Geht natürlich nur bei GET Requests</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_expires"><a class="anchor" href="#_expires"></a>3.2. Expires</h3>
+<div class="sect3">
+<h4 id="_http_header"><a class="anchor" href="#_http_header"></a>3.2.1. HTTP-Header</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ich biete als Server eine Resource an</p>
+</li>
+<li>
+<p>Wenn ich eine Response schicke, hänge ich ein Header-Feld an</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/http-bsp.png" alt="http bsp">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Der Client weiß jetzt, dass er vor diesem Timestamp nicht nochmal fragen braucht</p>
+</li>
+<li>
+<p>Der Client gibt in diesem Fall dem Programmierer die 'alte' Antwort (passiert in Clients automatisch)</p>
+</li>
+<li>
+<p>Ansonsten holt sich der Client eine neue Resource ab (mit neuem expires-feld)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_expires_2"><a class="anchor" href="#_expires_2"></a>3.2.2. Expires</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Eingestellt am Server</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Muss sich mal wer überlegen</p>
+</li>
+<li>
+<p>Kann sich auch ändern</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Passiert dann eigentlich im Client</p>
+</li>
+<li>
+<p>Ist für den Entwickler 'transparent'</p>
+</li>
+<li>
+<p>Der Entwickler macht einen einen Request, der Client merkt sich die Antworten per Resource (URL)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_beispiel"><a class="anchor" href="#_beispiel"></a>3.2.3. Beispiel:</h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/expires-bsp.png" alt="expires bsp">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_e_tag_hashing"><a class="anchor" href="#_e_tag_hashing"></a>3.3. E-Tag Hashing</h3>
+<div class="sect3">
+<h4 id="_e_tag"><a class="anchor" href="#_e_tag"></a>3.3.1. E-Tag</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ich biete am Server eine Resource an</p>
+</li>
+<li>
+<p>Wenn ich eine Resource schicke, hänge ich einen Hash-Wert an, der eindeutig ist für diese 'Version' der Antwort</p>
+</li>
+<li>
+<p>Wenn ein Client die Resource anfragt, schickt er den Hash-Wert mit</p>
+</li>
+<li>
+<p>Am Server: Wenn der Hash-Wert der Antwort sich mit dem mitgeschickten Hash-Wert deckt, dann schicke ich einfach den HTTP-Status-Code: <strong>304 - Not Modified</strong></p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_beispiel_2"><a class="anchor" href="#_beispiel_2"></a>Beispiel:</h5>
+<div class="imageblock">
+<div class="content">
+<img src="images/etag-bsp.png" alt="etag bsp">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_http_status_ranges_in_a_nutshell"><a class="anchor" href="#_http_status_ranges_in_a_nutshell"></a>3.4. HTTP status ranges in a nutshell</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/nutshell-bsp.png" alt="nutshell bsp">
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-09-25 13:28:01 UTC
+Last updated 2023-10-09 05:41:19 UTC
 </div>
 </div>
 </body>
