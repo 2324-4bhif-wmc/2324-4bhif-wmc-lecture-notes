@@ -742,7 +742,7 @@ Internet für Prozesse und Maschinen
 <div class="sect2">
 <h3 id="_expires"><a class="anchor" href="#_expires"></a>3.2. Expires</h3>
 <div class="sect3">
-<h4 id="_http_header"><a class="anchor" href="#_http_header"></a>3.2.1. HTTP-Header</h4>
+<h4 id="_feld_im_http_header"><a class="anchor" href="#_feld_im_http_header"></a>3.2.1. Feld im HTTP-Header</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -767,7 +767,7 @@ Internet für Prozesse und Maschinen
 <p>Der Client gibt in diesem Fall dem Programmierer die 'alte' Antwort (passiert in Clients automatisch)</p>
 </li>
 <li>
-<p>Ansonsten holt sich der Client eine neue Resource ab (mit neuem expires-feld)</p>
+<p>Ansonsten holt sich der Client eine neue Resource ab (mit neuem expires-Feld)</p>
 </li>
 </ul>
 </div>
@@ -797,6 +797,9 @@ Internet für Prozesse und Maschinen
 </li>
 <li>
 <p>Der Entwickler macht einen einen Request, der Client merkt sich die Antworten per Resource (URL)</p>
+</li>
+<li>
+<p>Spart die komplette Übertragung des Requests und des Responses</p>
 </li>
 </ul>
 </div>
@@ -828,6 +831,9 @@ Internet für Prozesse und Maschinen
 <li>
 <p>Am Server: Wenn der Hash-Wert der Antwort sich mit dem mitgeschickten Hash-Wert deckt, dann schicke ich einfach den HTTP-Status-Code: <strong>304 - Not Modified</strong></p>
 </li>
+<li>
+<p>Spart eigentlich 'nur' die Rückübertragung der Daten im body des Responses (wenn es sich nicht verändert hat)</p>
+</li>
 </ul>
 </div>
 <div class="sect4">
@@ -853,7 +859,7 @@ Internet für Prozesse und Maschinen
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-09 05:41:19 UTC
+Last updated 2023-10-09 05:43:19 UTC
 </div>
 </div>
 </body>
