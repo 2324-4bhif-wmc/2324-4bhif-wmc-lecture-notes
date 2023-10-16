@@ -454,10 +454,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_2023_10_02_rest_resources_and_caching">3. 2023-10-02 REST - Resources and caching</a>
 <ul class="sectlevel2">
-<li><a href="#_cashing_explanation">3.1. Cashing Explanation</a></li>
-<li><a href="#_expires">3.2. Expires</a></li>
-<li><a href="#_e_tag_hashing">3.3. E-Tag Hashing</a></li>
-<li><a href="#_http_status_ranges_in_a_nutshell">3.4. HTTP status ranges in a nutshell</a></li>
+<li><a href="#_cashing_explanation">Cashing Explanation</a></li>
+<li><a href="#_expires">3.1. Expires</a></li>
+<li><a href="#_e_tag_hashing">3.2. E-Tag Hashing</a></li>
+<li><a href="#_http_status_ranges_in_a_nutshell">3.3. HTTP status ranges in a nutshell</a></li>
+</ul>
+</li>
+<li><a href="#_2023_10_09">4. 2023-10-09</a>
+<ul class="sectlevel2">
+<li><a href="#_k8s">4.1. k8s</a></li>
+<li><a href="#_beziehungen_in_klassendiagrammen">4.2. Beziehungen in Klassendiagrammen</a></li>
 </ul>
 </li>
 </ul>
@@ -689,9 +695,9 @@ Internet für Prozesse und Maschinen
 <h2 id="_2023_10_02_rest_resources_and_caching"><a class="anchor" href="#_2023_10_02_rest_resources_and_caching"></a>3. 2023-10-02 REST - Resources and caching</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_cashing_explanation"><a class="anchor" href="#_cashing_explanation"></a>3.1. Cashing Explanation</h3>
+<h3 id="_cashing_explanation"><a class="anchor" href="#_cashing_explanation"></a>Cashing Explanation</h3>
 <div class="sect3">
-<h4 id="_cashing"><a class="anchor" href="#_cashing"></a>3.1.1. Cashing</h4>
+<h4 id="_cashing"><a class="anchor" href="#_cashing"></a>Cashing</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -707,7 +713,7 @@ Internet für Prozesse und Maschinen
 </div>
 </div>
 <div class="sect3">
-<h4 id="_browser"><a class="anchor" href="#_browser"></a>3.1.2. Browser</h4>
+<h4 id="_browser"><a class="anchor" href="#_browser"></a>Browser</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -723,7 +729,7 @@ Internet für Prozesse und Maschinen
 </div>
 </div>
 <div class="sect3">
-<h4 id="_lösung"><a class="anchor" href="#_lösung"></a>3.1.3. Lösung</h4>
+<h4 id="_lösung"><a class="anchor" href="#_lösung"></a>Lösung</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -740,9 +746,9 @@ Internet für Prozesse und Maschinen
 </div>
 </div>
 <div class="sect2">
-<h3 id="_expires"><a class="anchor" href="#_expires"></a>3.2. Expires</h3>
+<h3 id="_expires"><a class="anchor" href="#_expires"></a>3.1. Expires</h3>
 <div class="sect3">
-<h4 id="_feld_im_http_header"><a class="anchor" href="#_feld_im_http_header"></a>3.2.1. Feld im HTTP-Header</h4>
+<h4 id="_feld_im_http_header"><a class="anchor" href="#_feld_im_http_header"></a>3.1.1. Feld im HTTP-Header</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -773,7 +779,7 @@ Internet für Prozesse und Maschinen
 </div>
 </div>
 <div class="sect3">
-<h4 id="_expires_2"><a class="anchor" href="#_expires_2"></a>3.2.2. Expires</h4>
+<h4 id="_expires_2"><a class="anchor" href="#_expires_2"></a>3.1.2. Expires</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -805,7 +811,7 @@ Internet für Prozesse und Maschinen
 </div>
 </div>
 <div class="sect3">
-<h4 id="_beispiel"><a class="anchor" href="#_beispiel"></a>3.2.3. Beispiel:</h4>
+<h4 id="_beispiel"><a class="anchor" href="#_beispiel"></a>3.1.3. Beispiel:</h4>
 <div class="imageblock">
 <div class="content">
 <img src="images/expires-bsp.png" alt="expires bsp">
@@ -814,9 +820,9 @@ Internet für Prozesse und Maschinen
 </div>
 </div>
 <div class="sect2">
-<h3 id="_e_tag_hashing"><a class="anchor" href="#_e_tag_hashing"></a>3.3. E-Tag Hashing</h3>
+<h3 id="_e_tag_hashing"><a class="anchor" href="#_e_tag_hashing"></a>3.2. E-Tag Hashing</h3>
 <div class="sect3">
-<h4 id="_e_tag"><a class="anchor" href="#_e_tag"></a>3.3.1. E-Tag</h4>
+<h4 id="_e_tag"><a class="anchor" href="#_e_tag"></a>3.2.1. E-Tag</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -847,7 +853,7 @@ Internet für Prozesse und Maschinen
 </div>
 </div>
 <div class="sect2">
-<h3 id="_http_status_ranges_in_a_nutshell"><a class="anchor" href="#_http_status_ranges_in_a_nutshell"></a>3.4. HTTP status ranges in a nutshell</h3>
+<h3 id="_http_status_ranges_in_a_nutshell"><a class="anchor" href="#_http_status_ranges_in_a_nutshell"></a>3.3. HTTP status ranges in a nutshell</h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/nutshell-bsp.png" alt="nutshell bsp">
@@ -856,10 +862,109 @@ Internet für Prozesse und Maschinen
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2023_10_09"><a class="anchor" href="#_2023_10_09"></a>4. 2023-10-09</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_k8s"><a class="anchor" href="#_k8s"></a>4.1. k8s</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.youtube.com/playlist?list=PLy7NrYWoggjziYQIDorlXjTvvwweTYoNC">Nana k8s</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_beziehungen_in_klassendiagrammen"><a class="anchor" href="#_beziehungen_in_klassendiagrammen"></a>4.2. Beziehungen in Klassendiagrammen</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/cld-1.png" alt="cld 1" width="590" height="126">
+</div>
+</div>
+<table class="tableblock frame-all grid-all fit-content">
+<caption class="title">Table 1. Beziehungen zwischen Klassen/Tabellen</caption>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Beziehungen</th>
+<th class="tableblock halign-left valign-top">Beschreibung</th>
+<th class="tableblock halign-left valign-top">Beispiel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Assoziation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>benutzt-Beziehung</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hansi hat einen Hund Flocki</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Komposition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>besteht-aus</strong> Beziehung; Merkmal: Objekt wird zerstört bei Zerlegung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Haus besteht aus Etagen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Aggregation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>besteht-aus</strong> Beziehung; Merkmal: Objekt wird bei Zerlegung <strong>NICHT</strong> zerstört</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto hat Autoreifen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vererbung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>is-a</strong> Vererbungsbeziehung</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ein Hund erbt vom Säugetier</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Was sind Stamm- und Bewegungsdaten:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>auch Master-Data und Transaction-Data genannt</p>
+</li>
+<li>
+<p>Stammdaten sind auch mehrere Perioden gültig zB Personen, Produkte, Kategorien, &#8230;&#8203;</p>
+</li>
+<li>
+<p>Bewegungsdaten sind meist nur eine Periode (zB Geschäftsjahr) gültig</p>
+<div class="ulist">
+<ul>
+<li>
+<p>zB Rechnungen, Bestellungen</p>
+</li>
+<li>
+<p>man erkennt Bewegungsdaten an einem Datum zB Rechnungsdatum, Bestelldatum</p>
+</li>
+<li>
+<p>Das Geburtsdatum bei Personen zählt nicht</p>
+</li>
+<li>
+<p>Bewegungsdaten sind meist zwischen Stammdaten angesiedelt</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Im obigen Beispiel sind Person und Abteilung die Stammdaten, die Arbeitszeit ist die Klasse der Bewegungsdaten.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-09 05:43:19 UTC
+Last updated 2023-10-16 11:13:33 UTC
 </div>
 </div>
 </body>
