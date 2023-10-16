@@ -583,7 +583,12 @@ pre.rouge .gs {
 <li><a href="#_2023_10_16">5. 2023-10-16</a>
 <ul class="sectlevel2">
 <li><a href="#_cld_vs_erd">5.1. CLD vs ERD</a></li>
-<li><a href="#_übung_mikroprojekt">5.2. Übung Mikroprojekt</a></li>
+<li><a href="#_json_binding">5.2. JSON-Binding</a></li>
+<li><a href="#_jsonobject">5.3. JsonObject</a></li>
+<li><a href="#_response">5.4. Response</a></li>
+<li><a href="#_exceptions">5.5. Exceptions</a></li>
+<li><a href="#_servlet">5.6. Servlet</a></li>
+<li><a href="#_übung_mikroprojekt">5.7. Übung Mikroprojekt</a></li>
 </ul>
 </li>
 </ul>
@@ -1309,7 +1314,169 @@ Accept: text/html <i class="conum" data-value="2"></i><b>(2)</b>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_übung_mikroprojekt"><a class="anchor" href="#_übung_mikroprojekt"></a>5.2. Übung Mikroprojekt</h3>
+<h3 id="_json_binding"><a class="anchor" href="#_json_binding"></a>5.2. JSON-Binding</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Java-Objekte werden in json konvertiert</p>
+<div class="ulist">
+<ul>
+<li>
+<p>java-object zu json: marshalling</p>
+</li>
+<li>
+<p>json zu java-object: unmarshalling</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Libraries für JSON und XML</p>
+<div class="ulist">
+<ul>
+<li>
+<p>JSON-B, Jackson &#8594; JSON</p>
+</li>
+<li>
+<p>JAXB &#8594; XML</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+bei den Entitäten @XMLRootElement hinzufügen
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="kn">import</span> <span class="nn">javax.xml.bind.annotation.XmlRootElement</span><span class="o">;</span>
+
+<span class="nd">@XmlRootElement</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Vehicle</span> <span class="o">{</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jsonobject"><a class="anchor" href="#_jsonobject"></a>5.3. JsonObject</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>eigenes JsonObject erstellen:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public class GreetingResource{
+    @GET
+    @Path("myJson")
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonObject myCustomJsonObject(){
+        JsonObject myObject = Json.createObjectBuilder()
+                .add("first-name", "Max")
+                .add("last-name","Mustermann")
+                .build();
+        return myObject;
+    }
+}</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">mittels GET-Request:</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="http"><span class="err">GET http://localhost:8080/vehicle/myJson
+Accept: application/json</span></code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/jsonobject-example.png" alt="jsonobject example">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_response"><a class="anchor" href="#_response"></a>5.4. Response</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>eigene Response erstellen:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>public class GreetingResource{
+    @GET
+    @Path("myresponse")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response myCustomResponse() {
+        return Response.ok(new Vehicle("Opel", "Karl")
+                )
+                .header("MY_HEADER", "java is cool")
+                .build();
+    }
+}</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">mittels GET-Request:</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="http"><span class="err">GET http://localhost:8080/vehicle/myresponse
+Accept: application/json</span></code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/response-example.png" alt="response example">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exceptions"><a class="anchor" href="#_exceptions"></a>5.5. Exceptions</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>In Java gibt es:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>unchecked exceptions</p>
+</li>
+<li>
+<p>checked exceptions</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_servlet"><a class="anchor" href="#_servlet"></a>5.6. Servlet</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Java-Klassen, welches in Internet kommt</p>
+</li>
+<li>
+<p>mit einem Pfad wird es aktiviert</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_übung_mikroprojekt"><a class="anchor" href="#_übung_mikroprojekt"></a>5.7. Übung Mikroprojekt</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1339,7 +1506,7 @@ Accept: text/html <i class="conum" data-value="2"></i><b>(2)</b>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-16 18:48:27 UTC
+Last updated 2023-10-16 18:49:57 UTC
 </div>
 </div>
 </body>
