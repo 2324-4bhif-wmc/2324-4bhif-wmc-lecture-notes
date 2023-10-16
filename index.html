@@ -434,6 +434,120 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge, pre.rouge .w {
+  color: #24292f;
+  background-color: #f6f8fa;
+}
+pre.rouge .k, pre.rouge .kd, pre.rouge .kn, pre.rouge .kp, pre.rouge .kr, pre.rouge .kt, pre.rouge .kv {
+  color: #cf222e;
+}
+pre.rouge .gr {
+  color: #f6f8fa;
+}
+pre.rouge .gd {
+  color: #82071e;
+  background-color: #ffebe9;
+}
+pre.rouge .nb {
+  color: #953800;
+}
+pre.rouge .nc {
+  color: #953800;
+}
+pre.rouge .no {
+  color: #953800;
+}
+pre.rouge .nn {
+  color: #953800;
+}
+pre.rouge .sr {
+  color: #116329;
+}
+pre.rouge .na {
+  color: #116329;
+}
+pre.rouge .nt {
+  color: #116329;
+}
+pre.rouge .gi {
+  color: #116329;
+  background-color: #dafbe1;
+}
+pre.rouge .kc {
+  color: #0550ae;
+}
+pre.rouge .l, pre.rouge .ld, pre.rouge .m, pre.rouge .mb, pre.rouge .mf, pre.rouge .mh, pre.rouge .mi, pre.rouge .il, pre.rouge .mo, pre.rouge .mx {
+  color: #0550ae;
+}
+pre.rouge .sb {
+  color: #0550ae;
+}
+pre.rouge .bp {
+  color: #0550ae;
+}
+pre.rouge .ne {
+  color: #0550ae;
+}
+pre.rouge .nl {
+  color: #0550ae;
+}
+pre.rouge .py {
+  color: #0550ae;
+}
+pre.rouge .nv, pre.rouge .vc, pre.rouge .vg, pre.rouge .vi, pre.rouge .vm {
+  color: #0550ae;
+}
+pre.rouge .o, pre.rouge .ow {
+  color: #0550ae;
+}
+pre.rouge .gh {
+  color: #0550ae;
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #0550ae;
+  font-weight: bold;
+}
+pre.rouge .s, pre.rouge .sa, pre.rouge .sc, pre.rouge .dl, pre.rouge .sd, pre.rouge .s2, pre.rouge .se, pre.rouge .sh, pre.rouge .sx, pre.rouge .s1, pre.rouge .ss {
+  color: #0a3069;
+}
+pre.rouge .nd {
+  color: #8250df;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #8250df;
+}
+pre.rouge .err {
+  color: #f6f8fa;
+  background-color: #82071e;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cm, pre.rouge .cp, pre.rouge .cpf, pre.rouge .c1, pre.rouge .cs {
+  color: #6e7781;
+}
+pre.rouge .gl {
+  color: #6e7781;
+}
+pre.rouge .gt {
+  color: #6e7781;
+}
+pre.rouge .ni {
+  color: #24292f;
+}
+pre.rouge .si {
+  color: #24292f;
+}
+pre.rouge .ge {
+  color: #24292f;
+  font-style: italic;
+}
+pre.rouge .gs {
+  color: #24292f;
+  font-weight: bold;
+}
+</style>
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
@@ -682,6 +796,191 @@ Internet für Prozesse und Maschinen
 <div class="content">
 <img src="images/confi-properties.png" alt="confi properties">
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_quarkus_rest_projekt"><a class="anchor" href="#_quarkus_rest_projekt"></a>2.1.3. Quarkus REST Projekt</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>File &#8594; new &#8594; Project&#8230;&#8203; &#8594; Fill all the fields and choose &#8594; Click "Next" &#8594; Choose "RESTEasy Reactive" &amp; "RESTEasy Reactive Jackson"</p>
+</li>
+</ul>
+</div>
+<details>
+<summary class="title">Konfigurationen</summary>
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="images/quarkus-project-1.png" alt="quarkus project 1">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/quarkus-project-2.png" alt="quarkus project 2">
+</div>
+</div>
+</div>
+</details>
+<div class="ulist">
+<ul>
+<li>
+<p>Als nächstes klickt auf "load as maven project" in der rechten unteren Ecke oder macht einen Rechtsklick auf das "pom.xml" File &#8594; "Maven" &#8594; "Reload project"</p>
+</li>
+<li>
+<p>Gebt dieses Kommando in das Terminal in eurem Projekt-folder ein, um das Programm zu starten:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">./mvnw clean quarkus:dev</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Wenn es Probleme mit der JAVA_HOME Environment-Variable gibt, versucht es einmal mithilfe dieser Links zu lösen:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Windows: <a href="https://mkyong.com/java/how-to-set-java_home-on-windows-10/" class="bare" target="_blank" rel="noopener">https://mkyong.com/java/how-to-set-java_home-on-windows-10/</a></p>
+</li>
+<li>
+<p>MacOS: <a href="http://widerin.net/blog/set-java_home-to-latest-java-on-osx/" class="bare" target="_blank" rel="noopener">http://widerin.net/blog/set-java_home-to-latest-java-on-osx/</a></p>
+</li>
+<li>
+<p>Linux: <a href="https://itsfoss.com/set-java-home-ubuntu/" class="bare" target="_blank" rel="noopener">https://itsfoss.com/set-java-home-ubuntu/</a> (Step 3)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Nun kann man einen "http-requests" folder mit einem "requests.http" File erstellen und in diesem schreibt man eine GET-Request, um den Output unserer Applikation zu testen:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="http"><span class="err">GET http://localhost:8080/hello
+####</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Man kann auch in der rechten oberen Ecke auf "Examples" klicken und dann weiters auf "Get Requests", um sich mehr Beispiele von http-Requests ansehen zu können.</p>
+</div>
+<details>
+<summary class="title">"Examples"-location</summary>
+<div class="content">
+<div class="imageblock">
+<div class="content">
+<img src="images/intellij-http-examples.png" alt="intellij http examples">
+</div>
+</div>
+</div>
+</details>
+<div class="ulist">
+<ul>
+<li>
+<p>Öffnet nun das "ExampleResource.java" File und benennt die Klasse neu.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="nd">@Path</span><span class="o">(</span><span class="s">"/hello"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GreetingResource</span> <span class="o">{</span>
+    <span class="nd">@ConfigProperty</span><span class="o">(</span><span class="n">name</span><span class="o">=</span><span class="s">"test"</span><span class="o">,</span> <span class="n">defaultValue</span> <span class="o">=</span> <span class="s">"hello"</span><span class="o">)</span>
+    <span class="nc">String</span> <span class="n">test</span><span class="o">;</span>
+    <span class="nd">@GET</span>
+    <span class="nd">@Produces</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_PLAIN</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hello</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%s 4bhif"</span><span class="o">,</span> <span class="n">test</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="nd">@GET</span>
+    <span class="nd">@Produces</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">TEXT_HTML</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">hello1</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"&lt;h1&gt;%s 4bhif"</span><span class="o">,</span> <span class="n">test</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Nun kann man wieder den Output mithilfe unseres "requests.http" File testen:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="http"><span class="err">GET http://localhost:8080/hello
+Accept: text/plain <i class="conum" data-value="1"></i><b>(1)</b>
+####
+GET http://localhost:8080/hello
+Accept: text/html <i class="conum" data-value="2"></i><b>(2)</b>
+####</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Durch "Accept" wird nur diese Form an Daten angenommen. Hier ist es nur normaler Text</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Dieser Get-Request nimmt nur normalen html Code an.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Der Typ der Daten wird im Code durch das "@Produces(MediaType" festgelegt.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Man kann auch mehrere Files erstellen, um den Wert von Variablen festzulegen.</p>
+</li>
+<li>
+<p>One can also create several files to define variables like the "text" variable from above in the "GreetingResource.java" File</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Mehr Informationen dazu gibt es oben bei dem Kapitel über "ConfigProperty"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Quarkus Tests:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Starten der Tests</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">./mvnw clean quarkus:test</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">&#8594; Wahrscheinlich wirst du jetzt einen error kriegen, da wir den Output unserer Get-Request geändert haben. Das wirst du in den Tests ändern müssen</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="nd">@QuarkusTest</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GreetingResourceTest</span> <span class="o">{</span>
+    <span class="nd">@Test</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testHelloEndpoint</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">given</span><span class="o">()</span>
+          <span class="o">.</span><span class="na">when</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"/hello"</span><span class="o">)</span>
+          <span class="o">.</span><span class="na">then</span><span class="o">()</span>
+             <span class="o">.</span><span class="na">statusCode</span><span class="o">(</span><span class="mi">200</span><span class="o">)</span>
+             <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="n">is</span><span class="o">(</span><span class="s">"servus 4bhif"</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Für unsere Tests werden wir im laufe des Jahres die rest-assured" und die "assertj" Bibliotheken verwenden.</p>
 </div>
 </div>
 </div>
@@ -1040,7 +1339,7 @@ Internet für Prozesse und Maschinen
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-16 18:35:00 UTC
+Last updated 2023-10-16 18:48:27 UTC
 </div>
 </div>
 </body>
