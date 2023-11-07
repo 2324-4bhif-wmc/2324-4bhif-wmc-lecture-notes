@@ -606,6 +606,15 @@ pre.rouge .gs {
 </ul>
 </li>
 <li><a href="#_übung_jpa">9. Übung JPA</a></li>
+<li><a href="#_2023_11_06_2">10. 2023-11-06</a>
+<ul class="sectlevel2">
+<li><a href="#_dependencies_in_quarkus">10.1. Dependencies in Quarkus</a></li>
+<li><a href="#_quarkus_parameter">10.2. Quarkus-Parameter</a></li>
+<li><a href="#_json_properties_für_jackson">10.3. JSON-Properties (für Jackson)</a></li>
+<li><a href="#_post_mit_uri">10.4. POST mit URI</a></li>
+<li><a href="#_entitymanager">10.5. EntityManager</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -1672,10 +1681,187 @@ understanding of Java, packt, 2023</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2023_11_06_2"><a class="anchor" href="#_2023_11_06_2"></a>10. 2023-11-06</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_dependencies_in_quarkus"><a class="anchor" href="#_dependencies_in_quarkus"></a>10.1. Dependencies in Quarkus</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Resteasy</p>
+<div class="ulist">
+<ul>
+<li>
+<p>REST-Endpunkt (Server)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Jackson</p>
+<div class="ulist">
+<ul>
+<li>
+<p>JSON - Writer/Reader</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>JAXB</p>
+<div class="ulist">
+<ul>
+<li>
+<p>XML - Writer/Reader</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Arc</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Bibliothek für das objektrelationale Mapping mit Hibernate (JPA)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>PostgreSQL</p>
+<div class="ulist">
+<ul>
+<li>
+<p>JDBC-Treiber</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_quarkus_parameter"><a class="anchor" href="#_quarkus_parameter"></a>10.2. Quarkus-Parameter</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>PathParam</p>
+</li>
+<li>
+<p>QueryParam</p>
+</li>
+<li>
+<p>FormParam</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Mehr dazu
+<a href="https://quarkus.io/guides/rest-client-reactive">hier</a></p>
+</div>
+<div class="sect3">
+<h4 id="_query_parameter"><a class="anchor" href="#_query_parameter"></a>10.2.1. Query Parameter</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="Java">@Path("/extensions")
+@RegisterRestClient
+public interface ExtensionsService {
+    @GET
+    Set&lt;Extension&gt; getById(@QueryParam("id") String id);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mapping"><a class="anchor" href="#_mapping"></a>10.2.2. Mapping</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="Java">@Path("/extensions")
+@RegisterRestClient(configKey = "extensions-api")
+public interface ExtensionsService {
+
+    @GET
+    Set&lt;Extension&gt; getById(@QueryParam("id") Integer id);
+
+    @GET
+    Set&lt;Extension&gt; getByName(@RestQuery String name);
+
+    @GET
+    Set&lt;Extension&gt; getByFilter(@RestQuery Map&lt;String, String&gt; filter);
+
+    @GET
+    Set&lt;Extension&gt; getByFilters(@RestQuery MultivaluedMap&lt;String, String&gt; filters);
+
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_json_properties_für_jackson"><a class="anchor" href="#_json_properties_für_jackson"></a>10.3. JSON-Properties (für Jackson)</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="Java">class Person {
+    @JsonProperty("first_name")
+    public String firstName;
+    @JsonProperty("last_name")
+    public String lastName;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_post_mit_uri"><a class="anchor" href="#_post_mit_uri"></a>10.4. POST mit URI</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="Java">class PersonResource {
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addPerson(Person person, @Context URI uriInfo) {
+        personRepository.add(person);
+        URI uri = uriInfo
+            .getAbsolutePathBuilder()
+            .path("42")
+            .build();
+
+        return Response
+                .created(uri)
+                .build();
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_entitymanager"><a class="anchor" href="#_entitymanager"></a>10.5. EntityManager</h3>
+<div class="paragraph">
+<p>Der EntityManager in Java ist eine Schlüsselkomponente der Java Persistence API (JPA), die dazu dient, Datenbank-Entitäten zu verwalten, erstellen, aktualisieren und löschen.</p>
+</div>
+<div class="paragraph">
+<p>Um den EntityManager in einem Repository zu verwenden, muss man ihn wie folgt einbinden:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="Java">import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+
+@ApplicationScoped
+class Repository {
+    @Inject
+    EntityManager em;
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-06 14:28:49 UTC
+Last updated 2023-11-07 20:15:06 UTC
 </div>
 </div>
 </body>
