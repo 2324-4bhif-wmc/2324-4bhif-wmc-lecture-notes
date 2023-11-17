@@ -615,6 +615,13 @@ pre.rouge .gs {
 <li><a href="#_entitymanager">10.5. EntityManager</a></li>
 </ul>
 </li>
+<li><a href="#_2023_11_13">11. 2023-11-13</a>
+<ul class="sectlevel2">
+<li><a href="#_arten_von_rest_parameter">11.1. Arten von REST-Parameter</a></li>
+<li><a href="#_versioning">11.2. Versioning</a></li>
+<li><a href="#_vererbung_in_datenbanken_darstellen">11.3. Vererbung in Datenbanken darstellen</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -1855,13 +1862,206 @@ class Repository {
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Zustände eines Objekts:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/states-of-object.png" alt="states of object" width="500">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2023_11_13"><a class="anchor" href="#_2023_11_13"></a>11. 2023-11-13</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_arten_von_rest_parameter"><a class="anchor" href="#_arten_von_rest_parameter"></a>11.1. Arten von REST-Parameter</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Path-Parameter</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>GET https://example.com/users/104</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Query-Parameter</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>GET https://example.com/users?size=10&amp;offset=20</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_versioning"><a class="anchor" href="#_versioning"></a>11.2. Versioning</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Semantic Versioning (SemVer)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Format: Hauptversion.Nebenversion.Patch (z.B., 1.2.3)</p>
+</li>
+<li>
+<p>1. Stelle: Hauptversion (Major) für große Änderungen</p>
+</li>
+<li>
+<p>2. Stelle: Nebenversion (Minor) für neue, abwärtskompatible Funktionen</p>
+</li>
+<li>
+<p>3. Stelle: Patch für abwärtskompatible Fehlerbehebungen</p>
+</li>
+<li>
+<p>Vorabversionen und Build-Informationen sind optional (z.B., 1.2.3-alpha+001)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Calendar Versioning (CalVer)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>verwendet ein datumsbasiertes Versionsformat</p>
+</li>
+<li>
+<p>Format: YYYY.MM.DD (z.B., 2023.01.15)</p>
+</li>
+<li>
+<p>spiegelt das Veröffentlichungsdatum wider, um die Chronologie anzuzeigen</p>
+</li>
+<li>
+<p>enthält keine Informationen über die Art der Änderungen</p>
+</li>
+<li>
+<p>Konzentriert sich darauf, wann die Veröffentlichung erfolgt, anstatt den Typ der Änderungen anzugeben</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vererbung_in_datenbanken_darstellen"><a class="anchor" href="#_vererbung_in_datenbanken_darstellen"></a>11.3. Vererbung in Datenbanken darstellen</h3>
+<div class="paragraph">
+<p>Als Beispiel ist eine Vererbung mit den Klassen PKW und LKW gegeben, die von der abstrakten Basisklasse Fahrzeug erben.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/vererbung-db.png" alt="vererbung db" width="228" height="201">
+</div>
+</div>
+<div class="paragraph">
+<p>Um dieses Datenmodell in die Datenbank zu übertragen, gibt es im Grunde 2 Möglichkeiten.</p>
+</div>
+<div class="paragraph">
+<p>Möglichkeit 1: Table per Class &#8594; für alle Unterklassen eine eigene Tabelle</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">PKW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Leistung</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passagiere</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">LKW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Leistung</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Achsen</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Implementierung in Quarkus:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="nd">@Inheritance</span><span class="o">(</span><span class="n">strategy</span><span class="o">=</span><span class="nc">InheritanceType</span><span class="o">.</span><span class="na">TABLE_PER_CLASS</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PKW</span> <span class="o">{</span>
+    <span class="c1">// ...</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Möglichkeit 2: Single Table &#8594; eine Tablle für die Basisklasse, wo auch die Attribute der Unterklassen enthalten sind</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Fahrzeug</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Leistung</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passagiere</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Achsen</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delimiter</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Implementierung in Quarkus:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="nd">@Inheritance</span><span class="o">(</span><span class="n">strategy</span><span class="o">=</span><span class="nc">InheritanceType</span><span class="o">.</span><span class="na">SINGLE_TABLE</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Fahrzeug</span> <span class="o">{</span>
+    <span class="c1">// ...</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-10 22:14:26 UTC
+Last updated 2023-11-17 18:11:37 UTC
 </div>
 </div>
 </body>
