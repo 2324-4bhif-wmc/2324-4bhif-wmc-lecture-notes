@@ -623,11 +623,9 @@ pre.rouge .gs {
 <li><a href="#_vererbung_in_datenbanken_darstellen">12.3. Vererbung in Datenbanken darstellen</a></li>
 </ul>
 </li>
-<li><a href="#_2023_11_21">13. 2023-11-21</a>
+<li><a href="#_2023_11_20">13. 2023-11-20</a>
 <ul class="sectlevel2">
-<li><a href="#_query_mit_300_000_zeilen">13.1. Query mit 300 000 Zeilen</a></li>
-<li><a href="#_count_in_einer_query">13.2. Count in einer Query</a></li>
-<li><a href="#_übung_für_wmc_test">13.3. Übung für WMC-Test</a></li>
+<li><a href="#_panache">13.1. Panache</a></li>
 </ul>
 </li>
 </ul>
@@ -1319,7 +1317,7 @@ Accept: text/html <i class="conum" data-value="2"></i><b>(2)</b>
 <h4 id="_cld"><a class="anchor" href="#_cld"></a>5.1.1. CLD</h4>
 <div class="imageblock">
 <div class="content">
-<img src="images/cldvserd.svg" alt="cldvserd" width="401" height="62">
+<img src="images/cldvserd1.svg" alt="cldvserd1" width="401" height="62">
 </div>
 <div class="title">Figure 1. *-* Beziehung</div>
 </div>
@@ -2072,55 +2070,198 @@ class Repository {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_2023_11_21"><a class="anchor" href="#_2023_11_21"></a>13. 2023-11-21</h2>
+<h2 id="_2023_11_20"><a class="anchor" href="#_2023_11_20"></a>13. 2023-11-20</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Autor: Moritz Gruber</p>
+<p>Möglichkeit 3: JOINED &#8594; Attribute der Basisklasse in einer
+Tabelle und je eine Tabelle pro
+abgeleiteter Klasse (mit
+Diskriminator* DTYPE)</p>
 </div>
-<div class="sect2">
-<h3 id="_query_mit_300_000_zeilen"><a class="anchor" href="#_query_mit_300_000_zeilen"></a>13.1. Query mit 300 000 Zeilen</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><code>paging</code>: Ergebniszeilen werden in Seiten mit XX Zeilen aufgeteilt.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>offset: gibt an wie viele Elemente ausgelassen werden</p>
-</li>
-<li>
-<p>limit: gibt an wie viele Elemente man ab dem offset bekommt</p>
-</li>
-<li>
-<p>BSP:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>1. Page hat Offset 0 und Limit 100</p>
-</li>
-<li>
-<p>2. Page hat Offset 100 und Limit 100</p>
-</li>
-</ul>
+<div class="paragraph">
+<p><em>*Diskriminator = Unterscheidungsmerkmal</em></p>
 </div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><code>stream</code>: Man bekommt Ergebnisse Stück für Stück und nicht auf einmal. Somit kann man mit den bereits erhaltenen Daten gleich weiterarbeiten.</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="nd">@Inheritance</span><span class="o">(</span><span class="n">strategy</span><span class="o">=</span><span class="nc">InheritanceType</span><span class="o">.</span><span class="na">JOINED</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Kfz</span> <span class="o">{</span>
+    <span class="c1">// ...</span>
+<span class="o">}</span></code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_count_in_einer_query"><a class="anchor" href="#_count_in_einer_query"></a>13.2. Count in einer Query</h3>
+<h3 id="_panache"><a class="anchor" href="#_panache"></a>13.1. Panache</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>BSP: Zählen der Männer eines Unternehmens</p>
+<p>Hibernate ORM, am meisten verbreitetste JPA Implementierung</p>
+</li>
+<li>
+<p>Erlaubt detailliert konfigurierbares und komplexes OR-Mapping</p>
+</li>
+<li>
+<p>Jedoch nicht wirklich einfach zu verwenden weil ziemlich trivial</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>Konfiguration der Data-Source (application.properties):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="properties"><span class="c"># configure your datasource
+</span><span class="py">quarkus.datasource.db-kind</span> <span class="p">=</span> <span class="s">derby</span>
+<span class="py">quarkus.datasource.username</span> <span class="p">=</span> <span class="s">app</span>
+<span class="py">quarkus.datasource.password</span> <span class="p">=</span> <span class="s">app</span>
+<span class="py">quarkus.datasource.jdbc.url</span> <span class="p">=</span> <span class="s">jdbc:derby://localhost:1527/myDB;create=true</span>
+<span class="c"># drop and create the database at startup (use `update` to only update the schema)
+</span><span class="py">quarkus.hibernate-orm.database.generation</span> <span class="p">=</span> <span class="s">drop-and-create</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Entity-Klasse:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="nd">@Entity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>
+    <span class="nd">@Id</span>
+    <span class="kd">private</span> <span class="nc">Long</span> <span class="n">svnr</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">firstname</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">lastname</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">()</span> <span class="o">{}</span>
+    <span class="kd">public</span> <span class="nf">Person</span><span class="o">(</span><span class="nc">Long</span> <span class="n">svnr</span><span class="o">,</span> <span class="nc">String</span> <span class="n">firstname</span><span class="o">,</span> <span class="nc">String</span> <span class="n">lastname</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">svnr</span> <span class="o">=</span> <span class="n">svnr</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">firstname</span> <span class="o">=</span> <span class="n">firstname</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">lastname</span> <span class="o">=</span> <span class="n">lastname</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// Getter und Setter</span>
+
+<span class="o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Zugriff über EntityManager:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="nd">@Path</span><span class="o">(</span><span class="s">"/person"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleResource</span> <span class="o">{</span>
+    <span class="nd">@Inject</span>
+    <span class="nc">EntityManager</span> <span class="n">em</span><span class="o">;</span>
+
+    <span class="nd">@GET</span>
+    <span class="nd">@Produces</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">Person</span> <span class="nf">getPerson</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">em</span><span class="o">.</span><span class="na">find</span><span class="o">(</span><span class="nc">Person</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="mi">1L</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@GET</span>
+    <span class="nd">@Path</span><span class="o">(</span><span class="s">"init"</span><span class="o">)</span>
+    <span class="nd">@Transactional</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
+    <span class="nc">Person</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Person</span><span class="o">(</span><span class="mi">1L</span><span class="o">,</span> <span class="s">"Max"</span><span class="o">,</span> <span class="s">"Muster"</span><span class="o">);</span>
+        <span class="n">em</span><span class="o">.</span><span class="na">persist</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+        <span class="k">return</span> <span class="s">"init ok"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Zugriff mittels klassischem JPA:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Nachteile</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Felder <em>private</em></p>
+</li>
+<li>
+<p>generierte Getter und Setter machen unnötig viel Code</p>
+</li>
+<li>
+<p>Methoden für Standard-Zugriffe werden immer wieder neu implementiert
+(zB Count, &#8230;&#8203;)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>&#8594; Panache macht das einfacher</p>
+</div>
+<div class="paragraph">
+<p>2 Patterns:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Active-Record-Pattern</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Objekte enthalten Daten und Verhalten</p>
+</li>
+<li>
+<p>Felder sind public, keine Getter/Setter notwendig</p>
+</li>
+<li>
+<p>Getter/Setter optional für Validierungen, Umwandlungen &#8594;
+werden auch bei Feldzugriff automatisch verwendet</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Repository-Pattern</p>
+<div class="ulist">
+<ul>
+<li>
+<p>klassische Entity-Klasse erstellen, je nach Bedarf:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>klassische JPA-Entities oder</p>
+</li>
+<li>
+<p>Extend PanacheEntityBase (keine Getter/Setter) oder</p>
+</li>
+<li>
+<p>Extend PanacheEntity (default ID)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>== 2023-11-21
+Autor: Moritz Gruber</p>
+</div>
+<div class="paragraph">
+<p>=== Query mit 300 000 Zeilen
+* <code>paging</code>: Ergebniszeilen werden in Seiten mit XX Zeilen aufgeteilt.
+<strong> offset: gibt an wie viele Elemente ausgelassen werden
+</strong> limit: gibt an wie viele Elemente man ab dem offset bekommt
+<strong> BSP:
+</strong>* 1. Page hat Offset 0 und Limit 100
+<strong>*</strong> 2. Page hat Offset 100 und Limit 100
+* <code>stream</code>: Man bekommt Ergebnisse Stück für Stück und nicht auf einmal. Somit kann man mit den bereits erhaltenen Daten gleich weiterarbeiten.</p>
+</div>
+<div class="paragraph">
+<p>=== Count in einer Query
+* BSP: Zählen der Männer eines Unternehmens</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2143,41 +2284,22 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>=== Übung für WMC-Test</p>
 </div>
-<div class="sect2">
-<h3 id="_übung_für_wmc_test"><a class="anchor" href="#_übung_für_wmc_test"></a>13.3. Übung für WMC-Test</h3>
-<div class="sect3">
-<h4 id="_setup_project"><a class="anchor" href="#_setup_project"></a>13.3.1. Setup Project</h4>
+<div class="paragraph">
+<p>==== Setup Project
+* Dependencies in der pom.xml hinzufügen
+<strong> quarkus-resteasy-reactive-jackson
+</strong> quarkus-resteasy-reactive
+<strong> quarkus-hibernate-orm
+</strong> quarkus-jdbc-derby
+<strong> quarkus-smallrye-openapi
+</strong> assertj-core
+** assertj-db</p>
+</div>
 <div class="ulist">
 <ul>
-<li>
-<p>Dependencies in der pom.xml hinzufügen</p>
-<div class="ulist">
-<ul>
-<li>
-<p>quarkus-resteasy-reactive-jackson</p>
-</li>
-<li>
-<p>quarkus-resteasy-reactive</p>
-</li>
-<li>
-<p>quarkus-hibernate-orm</p>
-</li>
-<li>
-<p>quarkus-jdbc-derby</p>
-</li>
-<li>
-<p>quarkus-smallrye-openapi</p>
-</li>
-<li>
-<p>assertj-core</p>
-</li>
-<li>
-<p>assertj-db</p>
-</li>
-</ul>
-</div>
-</li>
 <li>
 <p><a href="http://edufs.edu.htl-leonding.ac.at/~t.stuetz/download/nvs/scripts/">download-derbydb-and-jdk.sh</a> in das Repository kopieren und ausführen</p>
 </li>
@@ -2214,44 +2336,18 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>==== Verzeichnisstruktur
+* main/java
+<strong> at.htl.book.entity
+</strong>* Author
+<strong>* Book
+</strong> at.htl.book.control
+<strong>* AuthorRepository
+</strong>* BookRepository</p>
 </div>
-<div class="sect3">
-<h4 id="_verzeichnisstruktur"><a class="anchor" href="#_verzeichnisstruktur"></a>13.3.2. Verzeichnisstruktur</h4>
 <div class="ulist">
 <ul>
-<li>
-<p>main/java</p>
-<div class="ulist">
-<ul>
-<li>
-<p>at.htl.book.entity</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Author</p>
-</li>
-<li>
-<p>Book</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>at.htl.book.control</p>
-<div class="ulist">
-<ul>
-<li>
-<p>AuthorRepository</p>
-</li>
-<li>
-<p>BookRepository</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
 <li>
 <p>test/java</p>
 <div class="ulist">
@@ -2287,9 +2383,9 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>==== Entity</p>
 </div>
-<div class="sect3">
-<h4 id="_entity"><a class="anchor" href="#_entity"></a>13.3.3. Entity</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="java"><span class="nd">@Entity</span>
@@ -2335,9 +2431,9 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>==== Repository</p>
 </div>
-<div class="sect3">
-<h4 id="_repository"><a class="anchor" href="#_repository"></a>13.3.4. Repository</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="java"><span class="nd">@ApplicationScoped</span> <i class="conum" data-value="1"></i><b>(1)</b>
@@ -2367,9 +2463,9 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>==== RepositoryTest</p>
 </div>
-<div class="sect3">
-<h4 id="_repositorytest"><a class="anchor" href="#_repositorytest"></a>13.3.5. RepositoryTest</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="java"><span class="nd">@QuarkusTest</span> <i class="conum" data-value="1"></i><b>(1)</b>
@@ -2420,9 +2516,10 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </div>
 </div>
 </div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-18 12:55:50 UTC
+Last updated 2023-12-18 12:57:57 UTC
 </div>
 </div>
 </body>
