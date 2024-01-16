@@ -628,6 +628,26 @@ pre.rouge .gs {
 <li><a href="#_panache">13.1. Panache</a></li>
 </ul>
 </li>
+<li><a href="#_2023_11_21">14. 2023-11-21</a>
+<ul class="sectlevel2">
+<li><a href="#_query_mit_300_000_zeilen">14.1. Query mit 300 000 Zeilen</a></li>
+<li><a href="#_count_in_einer_query">14.2. Count in einer Query</a></li>
+<li><a href="#_übung_für_wmc_test">14.3. Übung für WMC-Test</a></li>
+</ul>
+</li>
+<li><a href="#_2023_12_18">15. 2023-12-18</a>
+<ul class="sectlevel2">
+<li><a href="#_jpa_queries">15.1. JPA-Queries</a></li>
+</ul>
+</li>
+<li><a href="#_2024_01_08">16. 2024-01-08</a></li>
+<li><a href="#_2024_01_09">17. 2024-01-09</a></li>
+<li><a href="#_2024_01_15">18. 2024-01-15</a>
+<ul class="sectlevel2">
+<li><a href="#_panache_2">18.1. Panache</a></li>
+<li><a href="#_qute">18.2. Qute</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -2243,25 +2263,59 @@ werden auch bei Feldzugriff automatisch verwendet</p>
 </li>
 </ul>
 </div>
-<div class="exampleblock">
-<div class="content">
-<div class="paragraph">
-<p>== 2023-11-21
-Autor: Moritz Gruber</p>
 </div>
-<div class="paragraph">
-<p>=== Query mit 300 000 Zeilen
-* <code>paging</code>: Ergebniszeilen werden in Seiten mit XX Zeilen aufgeteilt.
-<strong> offset: gibt an wie viele Elemente ausgelassen werden
-</strong> limit: gibt an wie viele Elemente man ab dem offset bekommt
-<strong> BSP:
-</strong>* 1. Page hat Offset 0 und Limit 100
-<strong>*</strong> 2. Page hat Offset 100 und Limit 100
-* <code>stream</code>: Man bekommt Ergebnisse Stück für Stück und nicht auf einmal. Somit kann man mit den bereits erhaltenen Daten gleich weiterarbeiten.</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_2023_11_21"><a class="anchor" href="#_2023_11_21"></a>14. 2023-11-21</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>=== Count in einer Query
-* BSP: Zählen der Männer eines Unternehmens</p>
+<p>Autor: Moritz Gruber</p>
+</div>
+<div class="sect2">
+<h3 id="_query_mit_300_000_zeilen"><a class="anchor" href="#_query_mit_300_000_zeilen"></a>14.1. Query mit 300 000 Zeilen</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>paging</code>: Ergebniszeilen werden in Seiten mit XX Zeilen aufgeteilt.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>offset: gibt an wie viele Elemente ausgelassen werden</p>
+</li>
+<li>
+<p>limit: gibt an wie viele Elemente man ab dem offset bekommt</p>
+</li>
+<li>
+<p>BSP:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1. Page hat Offset 0 und Limit 100</p>
+</li>
+<li>
+<p>2. Page hat Offset 100 und Limit 100</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>stream</code>: Man bekommt Ergebnisse Stück für Stück und nicht auf einmal. Somit kann man mit den bereits erhaltenen Daten gleich weiterarbeiten.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_count_in_einer_query"><a class="anchor" href="#_count_in_einer_query"></a>14.2. Count in einer Query</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>BSP: Zählen der Männer eines Unternehmens</p>
+</li>
+</ul>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2284,22 +2338,41 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>=== Übung für WMC-Test</p>
 </div>
-<div class="paragraph">
-<p>==== Setup Project
-* Dependencies in der pom.xml hinzufügen
-<strong> quarkus-resteasy-reactive-jackson
-</strong> quarkus-resteasy-reactive
-<strong> quarkus-hibernate-orm
-</strong> quarkus-jdbc-derby
-<strong> quarkus-smallrye-openapi
-</strong> assertj-core
-** assertj-db</p>
-</div>
+<div class="sect2">
+<h3 id="_übung_für_wmc_test"><a class="anchor" href="#_übung_für_wmc_test"></a>14.3. Übung für WMC-Test</h3>
+<div class="sect3">
+<h4 id="_setup_project"><a class="anchor" href="#_setup_project"></a>14.3.1. Setup Project</h4>
 <div class="ulist">
 <ul>
+<li>
+<p>Dependencies in der pom.xml hinzufügen</p>
+<div class="ulist">
+<ul>
+<li>
+<p>quarkus-resteasy-reactive-jackson</p>
+</li>
+<li>
+<p>quarkus-resteasy-reactive</p>
+</li>
+<li>
+<p>quarkus-hibernate-orm</p>
+</li>
+<li>
+<p>quarkus-jdbc-derby</p>
+</li>
+<li>
+<p>quarkus-smallrye-openapi</p>
+</li>
+<li>
+<p>assertj-core</p>
+</li>
+<li>
+<p>assertj-db</p>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p><a href="http://edufs.edu.htl-leonding.ac.at/~t.stuetz/download/nvs/scripts/">download-derbydb-and-jdk.sh</a> in das Repository kopieren und ausführen</p>
 </li>
@@ -2336,18 +2409,44 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>==== Verzeichnisstruktur
-* main/java
-<strong> at.htl.book.entity
-</strong>* Author
-<strong>* Book
-</strong> at.htl.book.control
-<strong>* AuthorRepository
-</strong>* BookRepository</p>
 </div>
+<div class="sect3">
+<h4 id="_verzeichnisstruktur"><a class="anchor" href="#_verzeichnisstruktur"></a>14.3.2. Verzeichnisstruktur</h4>
 <div class="ulist">
 <ul>
+<li>
+<p>main/java</p>
+<div class="ulist">
+<ul>
+<li>
+<p>at.htl.book.entity</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Author</p>
+</li>
+<li>
+<p>Book</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>at.htl.book.control</p>
+<div class="ulist">
+<ul>
+<li>
+<p>AuthorRepository</p>
+</li>
+<li>
+<p>BookRepository</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>test/java</p>
 <div class="ulist">
@@ -2383,9 +2482,9 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>==== Entity</p>
 </div>
+<div class="sect3">
+<h4 id="_entity"><a class="anchor" href="#_entity"></a>14.3.3. Entity</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="java"><span class="nd">@Entity</span>
@@ -2431,9 +2530,9 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>==== Repository</p>
 </div>
+<div class="sect3">
+<h4 id="_repository"><a class="anchor" href="#_repository"></a>14.3.4. Repository</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="java"><span class="nd">@ApplicationScoped</span> <i class="conum" data-value="1"></i><b>(1)</b>
@@ -2463,9 +2562,9 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>==== RepositoryTest</p>
 </div>
+<div class="sect3">
+<h4 id="_repositorytest"><a class="anchor" href="#_repositorytest"></a>14.3.5. RepositoryTest</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="java"><span class="nd">@QuarkusTest</span> <i class="conum" data-value="1"></i><b>(1)</b>
@@ -2515,11 +2614,105 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2023_12_18"><a class="anchor" href="#_2023_12_18"></a>15. 2023-12-18</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_jpa_queries"><a class="anchor" href="#_jpa_queries"></a>15.1. JPA-Queries</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>NamedQueries</p>
+</li>
+<li>
+<p>TypedQueries</p>
+</li>
+<li>
+<p>NativeQueries</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>JP-QL - Queries</p>
+</li>
+<li>
+<p>SQL - Queries &#8594; NativeQueries</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2024_01_08"><a class="anchor" href="#_2024_01_08"></a>16. 2024-01-08</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Think your product</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2024_01_09"><a class="anchor" href="#_2024_01_09"></a>17. 2024-01-09</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Stundentausch wegen "Think your product".</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2024_01_15"><a class="anchor" href="#_2024_01_15"></a>18. 2024-01-15</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_panache_2"><a class="anchor" href="#_panache_2"></a>18.1. Panache</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://quarkus.io/guides/hibernate-orm-panache" target="_blank" rel="noopener">Quarkus Panache - Simplified Hibernate ORM with Panache</a></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/panache-overview.png" alt="panache overview">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_transaktionen"><a class="anchor" href="#_transaktionen"></a>18.1.1. Transaktionen</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>keine Trnsaktionen im Repository</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_qute"><a class="anchor" href="#_qute"></a>18.2. Qute</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://quarkus.io/guides/qute-reference" class="bare">https://quarkus.io/guides/qute-reference</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-18 12:57:57 UTC
+Last updated 2024-01-16 07:38:31 UTC
 </div>
 </div>
 </body>
