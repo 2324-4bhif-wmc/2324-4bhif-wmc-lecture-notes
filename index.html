@@ -648,6 +648,7 @@ pre.rouge .gs {
 <li><a href="#_qute">18.2. Qute</a></li>
 </ul>
 </li>
+<li><a href="#_websockets">19. WebSockets</a></li>
 </ul>
 </div>
 </div>
@@ -2706,13 +2707,76 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </li>
 </ul>
 </div>
+<div class="sect3">
+<h4 id="_übung_qute"><a class="anchor" href="#_übung_qute"></a>18.2.1. Übung Qute</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Erstellen Sie zu Ihrem Microprojekt eine HTML-Seite zum Upload einer Tabellenzeile</p>
+</li>
+<li>
+<p>Erstellen Sie weiters ein Qute-Template (type-safe), dass diese Tabelle als List mit Bildern ausgibt (<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Card" target="_blank" rel="noopener">Cards</a>)</p>
+</li>
+<li>
+<p>Verwenden Sie <a href="https://www.webjars.org/" target="_blank" rel="noopener">webjars</a>, um js-Libraries einzubinden, zB <a href="https://htmx.org/" target="_blank" rel="noopener">htmx</a> oder <a href="https://picnicss.com/">picnic</a></p>
+</li>
+<li>
+<p><a href="https://www.svgrepo.com/collections/" target="_blank" rel="noopener">SVG-Icons und Grafiken</a></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">pom.xml</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="xml"><span class="nt">&lt;dependency&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>org.webjars.npm<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>picnic<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>7.1.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">.html-file</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="xml"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"refresh"</span> <span class="na">content=</span><span class="s">"10"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"webjars/picnic/7.1.0/picnic.min.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"icon"</span> <span class="na">href=</span><span class="s">"/img/favicon.ico"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>SVG-Animator<span class="nt">&lt;/title&gt;</span>
+...</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://quarkus.io/guides/qute-reference">Qute Reference Guide</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_websockets"><a class="anchor" href="#_websockets"></a>19. WebSockets</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>siehe vehicle-panache</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-16 07:38:31 UTC
+Last updated 2024-01-22 19:34:59 UTC
 </div>
 </div>
 </body>
