@@ -1188,13 +1188,106 @@ include::android.adoc
 
 === REST-Client
 
+== 2024-01-29
+Autor: David Lehner
 
+=== Security:
+* Authentifizierung:
+** Wer bin ich?
+** Identität
+* Autorisierung
+** Was darf ich tun?
+** Zugriffsverwaltung
+*** Beispielsweise durch Rollenverteilung (RBAC)
+*** Role based access control
+** MQTT - Broker
+*** Message Queuing Telemetry Transport
+
+Die Rollen kann man in ein File schreiben, in die Datenbank,
+in die Annotationen, oder auch in ein externes Produkt, wie Keycloak.
+
+image::roles.png[]
+
+=== CORS
+* Problem: Man in the Middle
+** Jemand, der Kommunikation mit Server abhört.
+* Cross-origin resource sharing verhindert dies
+* Origin: Woher kommt es?
+** Es darf nicht von wo anders kommen, wie angegeben
+
+image::corsProblem.png[]
+
+== 2024-02-12
+Autor: David Lehner
+
+=== Was ist eine Entität?
+* Fachbereichsklassen, welche in der Datenbank abgebildet werden.
+
+=== Welche Vererbungsmethoden gibt es in der Datenbank?
+* Single Table
+* Table per Class
+* Joined Table
+
+=== Websocket Grundprinzip
+.Websocket Klasse
+[source, java]
+----
+@ServerEndpoint("/chat/{username}") //<1>
+@ApplicationScoped
+public class ChatSocket {
+
+}
+----
+* In Quarkus gibt es eine @ServerEndpoint Annotation, welche die Klasse als Websocket kennzeichnet, und den Pfad,
+auf welchen der Websocket erreichbar ist angibt.
+<1> Pfad, auf welchen der Websocket erreichbar ist.
+
+.Websocket Klasse mit ConcurrentHashMap
+[source, java]
+----
+@ServerEndpoint("/chat/{username}")
+@ApplicationScoped
+public class ChatSocket {
+    private static final Map<String, Session> sessions = new ConcurrentHashMap<>(); //<1>
+}
+----
+* In einer Map werden die Sessions gespeichert, welche sich mit dem Server verbinden.
+<1> Map, in welcher die Sessions gespeichert werden.
+
+* Server kann ungefragt an den Client senden.
+
+=== Rest-Client
+
+* Bei einem Rest Client kann man im Programm Abfragen an einen Server senden.
+* Pfad für API in application.properties angegeben.
+
+.application.properties
+[]
+----
+quarkus.rest-client.quotes-api.url=https://type.fit/api
+----
+
+.Rest-Client Interface
+[source, java]
+----
+@Path("/quotes")
+@RegisterRestClient(configKey = "quotes-api") //<1>
+public interface QuoteService {
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    String getAll();
+}
+----
+<1> URL aus application.properties wird in @RegisterRestClient Annotation angegeben.
 
 == 2024-02-12
 
 === MQTT
 
 * Broker (Verteiler) Mosquitto
+** Verantwortlich für die Kommunikation zwischen Komponenten
+** Sammelt Nachrichten von Clients und schickt diese an andere Clients weiter.
+* Meist verwendet bei IoT Anwendungen
 
 * https://www.youtube.com/watch?v=SslVWiX8P2A
 * https://www.youtube.com/watch?v=dTTfygU61_E
