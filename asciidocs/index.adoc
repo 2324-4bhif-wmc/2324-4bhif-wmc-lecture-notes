@@ -1206,6 +1206,160 @@ include::android.adoc
 ** Erstellen Sie einen Quarkus Client mit Qute, der Ihre momentane Position in einer OSM-Map anzeigt
 ** Speichern Sie in der Datenbank Ihre Positions-Historie
 
+== 2024-02-26
 
+=== Annotationen
 
+* Informationen, welche während dem Kompilieren gelesen werden und dann in einen bytecode, oder auch nicht (kommt auf die Annotation an), eingetragen werden
 
+=== Hibernate ORM Panache
+
+https://quarkus.io/guides/hibernate-orm-panache
+
+* Unterschied zwischen .list und .find
+** .list gibt eine Liste zurück
+** .find gibt eine Query zurück, welche man dann noch zum Beispiel mit Parametern versorgen kann
+
+* Was heißt Objektorientiert:
+** Attribut einer Klasse
+* Was heißt Relational:
+** Spalte in der Datenbank
+
+* Wenn man einen anderen Datentypen als Long als ID möchte, muss dieser bei dem Panachrepository angegeben werden:
+
+[source, java]
+----
+public class PersonRepository implements PanacheRepositoryBase<Person, Integer> {
+    ...
+}
+----
+
+==== Simplified queries
+
+* HQL:
+** Hibernate Query Language
+** Eine Hibernate Query kann mehr, als die "normalen" JPA Queries
+* Form:
+----
+from EntityName [where ...] [order by ...]
+----
+
+==== Named queries
+
+* Verwendung:
+
+[source, java]
+----
+entityRepository.find('#Entity.namedQuery', parameter);
+----
+
+* Name der Parameterarten:
+** Named Parameter
+
+[source, java]
+----
+Map<String, Object> params = new HashMap<>();
+params.put("name", "someone");
+params.put("status", Status.Alive);
+Person.find("name = :name and status = :status", params);
+----
+** Positional Parameter
+
+[source, java]
+----
+Person.find("name = ?1 and status = ?2", "stef", Status.Alive);
+----
+
+* Reflexion:
+** Man kann auf die Funktionen zugreifen und Metainformationen (= Informationen über die Art der Daten; "Daten über Daten") abrufen und verändern.
+*** Damit kann man zum Beispiel auf "private-Daten" zugreifen.
+** Verboten in Quarkus, da es langsam ist. Trotzdem braucht man es hin und wieder:
+
+[source, java]
+----
+@RegisterForReflexion
+public class Person {
+    private String name;
+}
+----
+
+=== Locks
+
+* Wir verwenden nur Record level Locks
+
+==== Arten
+
+image:locking-arten-2024-02-26.png[alt=locking-arten,200, 40]
+
+* Optimistisch
+** Einer muss "aufgeben"
+** Verwendet die Version-Nummer, um festzustellen, ob sich die Version nicht geändert hat, bevor Sie den Datensatz zurückschreiben.
+** Falls dies doch der Fall ist, bricht die Transaktion ab und kann erneut gestartet werden.
+
+* Pessimistisch
+** Eine Ampel, oder anderes, regelt den Verkehr
+** Benötigt entweder eine direkte Verbindung zur Datenbank oder eine extern verfügbare Transaktions-ID, die unabhängig von der Verbindung verwendet werden kann.
+
+=== SQL-Injection
+
+Man sollte nie
+[source, java]
+----
+"SELECT Person WHERE Name = " + name + ";";
+----
+verwenden, da es hierbei zu SQL-Injection kommen könnte.
+
+image:sql-injection-meme.png[]
+
+=== Quarkus
+
+* Warum benützt man Quarkus?
+** Geschwindigkeit, welche in unterschiedlichen Bereichen benötigt wird. Bsp.:
+*** Cloud
+*** Web
+
+NOTE: "A Kubernetes Native Java stack tailored for OpenJDK HotSpot and GraalVM..." - *quarkus.io*
+
+=== OICD - Keycloak
+
+* "Content-Type: application/x-www-form-urlencoded"
+** HTML-Formular
+
+==== Rest-Client
+
+* Sendet Requests an den Server
+* Beispiele:
+** requests.http
+*** Versionierbar
+*** Man kann auch Werte für zum Beispiel Authentifizierungen speichern und später in einer anderen Request wiederverwenden (https://www.jetbrains.com/help/idea/javascript-api-supported-by-http-client.html[Link^])
+
+[source, http]
+----
+### get access token
+
+POST https://auth.htl-leonding.ac.at/realms/htl-leonding/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+  client_id = htlleonding-service &
+  client_secret = AkIRaaboJ23Q64jSjtN9gkmfMumUybD8 &
+  grant_type = password &
+  username = {{username}} &
+  password = {{password}} &
+  #username = student &
+  #password = passme &
+  scope = openid
+
+> {%
+    client.global.set("auth_token", response.body.access_token);
+    client.log("Bearer: " + client.global.get("auth_token"));
+  %}
+
+###
+
+GET https://auth.htl-leonding.ac.at/realms/htl-leonding/protocol/openid-connect/userinfo
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+----
+
+** Browser
+** Programme wie Postman, Insomnia
