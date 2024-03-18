@@ -1,4 +1,5 @@
 = 23/24 4bhif wmc - Lecture Notes
+
 ifndef::imagesdir[:imagesdir: images]
 :icons: font
 :experimental:
@@ -14,11 +15,9 @@ endif::backend-html5[]
 
 == 2023-09-18
 
-
 === Intro microprofile
 
 https://htl-leonding-college.github.io/quarkus-lecture-notes/
-
 
 |===
 |Name |Thema
@@ -88,14 +87,10 @@ https://htl-leonding-college.github.io/quarkus-lecture-notes/
 
 |===
 
-
 * Application Server
 ** Web-Server für Java Applikationen
 ** Mit einem Java Application Server können Java Programme "ins Internet gebracht werden"
 ** Bsp: Glassfish (Referenzimplementierung), Payara, Wildfly, ...
-
-
-
 
 == 2023-09-25 REST-Service
 
@@ -123,7 +118,6 @@ https://quarkus.io/guides/config-reference[^]
 
 image::confi-properties.png[]
 
-
 ==== Quarkus REST Projekt
 
 * File -> new -> Project... -> Fill all the fields and choose -> Click "Next" -> Choose "RESTEasy Reactive" & "RESTEasy Reactive Jackson"
@@ -139,7 +133,7 @@ image::quarkus-project-2.png[]
 
 * Gebt dieses Kommando in das Terminal in eurem Projekt-folder ein, um das Programm zu starten:
 
-[source, bash]
+[source,bash]
 ----
 ./mvnw clean quarkus:dev
 ----
@@ -152,11 +146,12 @@ image::quarkus-project-2.png[]
 
 * Nun kann man einen "http-requests" folder mit einem "requests.http" File erstellen und in diesem schreibt man eine GET-Request, um den Output unserer Applikation zu testen:
 
-[source, http]
+[source,http]
 ----
 GET http://localhost:8080/hello
 ####
 ----
+
 Man kann auch in der rechten oberen Ecke auf "Examples" klicken und dann weiters auf "Get Requests", um sich mehr Beispiele von http-Requests ansehen zu können.
 
 ."Examples"-location
@@ -167,7 +162,7 @@ image::intellij-http-examples.png[]
 
 * Öffnet nun das "ExampleResource.java" File und benennt die Klasse neu.
 
-[source, java]
+[source,java]
 ----
 @Path("/hello")
 public class GreetingResource {
@@ -188,7 +183,7 @@ public class GreetingResource {
 
 * Nun kann man wieder den Output mithilfe unseres "requests.http" File testen:
 
-[source, http]
+[source,http]
 ----
 GET http://localhost:8080/hello
 Accept: text/plain #<.>
@@ -198,7 +193,8 @@ Accept: text/html #<.>
 ####
 ----
 
-<.> Durch "Accept" wird nur diese Form an Daten angenommen. Hier ist es nur normaler Text
+<.> Durch "Accept" wird nur diese Form an Daten angenommen.
+Hier ist es nur normaler Text
 
 <.> Dieser Get-Request nimmt nur normalen html Code an.
 
@@ -213,13 +209,13 @@ Der Typ der Daten wird im Code durch das "@Produces(MediaType" festgelegt.
 * Quarkus Tests:
 
 .Starten der Tests
-[source, bash]
+[source,bash]
 ----
 ./mvnw clean quarkus:test
 ----
 
 .-> Wahrscheinlich wirst du jetzt einen error kriegen, da wir den Output unserer Get-Request geändert haben. Das wirst du in den Tests ändern müssen
-[source, java]
+[source,java]
 ----
 @QuarkusTest
 public class GreetingResourceTest {
@@ -236,7 +232,6 @@ public class GreetingResourceTest {
 
 Für unsere Tests werden wir im laufe des Jahres die rest-assured" und die "assertj" Bibliotheken verwenden.
 
-
 === HÜ
 
 * Für eine Klasse (Stammdaten) einen Rest-Endpoint erstellen mit CRUD-Funktionalität, der die Daten in einer List speichert.
@@ -247,16 +242,19 @@ Für unsere Tests werden wir im laufe des Jahres die rest-assured" und die "asse
 === Cashing Explanation
 
 ==== Cashing
+
 * Es gibt Server und Clients
 * Jedes mal, wenn ein Client etwas benötigt, setzt er einen Request an den Server ab
 * Da kann schon was zusammen kommen
 
 ==== Browser
+
 * HTTP1.1 sagt: Jeder Browser darf nur maximal 2 Connections pro Webpage offen haben
 * Chrome hat ein Limit von 6 pro remote- site und 10 über den gesamten Browser
 * Wenn man da auf viele kleine Antworten wartet, dann kann das zu Verstopfungen führen
 
 ==== Lösung
+
 * Ich (der Client) hole mir nicht immer das allerneueste Objekt vom Backend, sondern gebe mich mit einem etwas älteren zufrieden. (-> weniger Requests)
 * Der Server schickt nur ein neues Objekt, falls sich die Antwort seit der letzten Anfrage geändert hat (sonst nicht)
 * Geht natürlich nur bei GET Requests
@@ -264,6 +262,7 @@ Für unsere Tests werden wir im laufe des Jahres die rest-assured" und die "asse
 === Expires
 
 ==== Feld im HTTP-Header
+
 * Ich biete als Server eine Resource an
 * Wenn ich eine Response schicke, hänge ich ein Header-Feld an
 
@@ -274,6 +273,7 @@ image::http-bsp.png[]
 * Ansonsten holt sich der Client eine neue Resource ab (mit neuem expires-Feld)
 
 ==== Expires
+
 * Eingestellt am Server
 ** Muss sich mal wer überlegen
 ** Kann sich auch ändern
@@ -283,11 +283,13 @@ image::http-bsp.png[]
 * Spart die komplette Übertragung des Requests und des Responses
 
 ==== Beispiel:
+
 image::expires-bsp.png[]
 
 === E-Tag Hashing
 
 ==== E-Tag
+
 * Ich biete am Server eine Resource an
 * Wenn ich eine Resource schicke, hänge ich einen Hash-Wert an, der eindeutig ist für diese 'Version' der Antwort
 * Wenn ein Client die Resource anfragt, schickt er den Hash-Wert mit
@@ -295,13 +297,15 @@ image::expires-bsp.png[]
 * Spart eigentlich 'nur' die Rückübertragung der Daten im body des Responses (wenn es sich nicht verändert hat)
 
 ===== Beispiel:
+
 image::etag-bsp.png[]
 
 === HTTP status ranges in a nutshell
+
 image::nutshell-bsp.png[]
 
-
 == 2023-10-09
+
 === k8s
 
 * https://www.youtube.com/playlist?list=PLy7NrYWoggjziYQIDorlXjTvvwweTYoNC[Nana k8s]
@@ -366,7 +370,6 @@ Abteilung "1" <-left- "*" Arbeitszeit: > in
 
 Im obigen Beispiel sind Person und Abteilung die Stammdaten, die Arbeitszeit ist die Klasse der Bewegungsdaten.
 
-
 == 2023-10-16
 
 === CLD vs ERD
@@ -409,7 +412,6 @@ Rechnungsposition "*" --> "1" Produkt
 @enduml
 ----
 
-
 ==== ERD
 
 .n:m-Beziehung
@@ -444,7 +446,6 @@ RechPos }|--|| Produkt
 @enduml
 ----
 
-
 === JSON-Binding
 
 * Java-Objekte werden in json konvertiert
@@ -457,7 +458,7 @@ RechPos }|--|| Produkt
 
 IMPORTANT: bei den Entitäten @XMLRootElement hinzufügen
 
-[source, java]
+[source,java]
 ----
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -469,7 +470,8 @@ public class Vehicle {
 === JsonObject
 
 * eigenes JsonObject erstellen:
-[source, java]
+
+[source,java]
 ----
 public class GreetingResource{
     @GET
@@ -486,7 +488,7 @@ public class GreetingResource{
 ----
 
 .mittels GET-Request:
-[source, http]
+[source,http]
 ----
 GET http://localhost:8080/vehicle/myJson
 Accept: application/json
@@ -497,7 +499,8 @@ image::jsonobject-example.png[]
 === Response
 
 * eigene Response erstellen:
-[source, java]
+
+[source,java]
 ----
 public class GreetingResource{
     @GET
@@ -513,7 +516,7 @@ public class GreetingResource{
 ----
 
 .mittels GET-Request:
-[source, http]
+[source,http]
 ----
 GET http://localhost:8080/vehicle/myresponse
 Accept: application/json
@@ -522,6 +525,7 @@ Accept: application/json
 image::response-example.png[]
 
 === Exceptions
+
 * In Java gibt es:
 ** unchecked exceptions
 ** checked exceptions
@@ -534,10 +538,10 @@ image::https://media.geeksforgeeks.org/wp-content/uploads/20230714113547/Excepti
 
 === Servlet
 
-* Als Jakarta Servlet (früher Java Servlet) bezeichnet man Java-Klassen, deren Instanzen innerhalb eines Webservers Anfragen von Clients entgegennehmen und beantworten. Der Inhalt der Antworten kann dabei dynamisch, also im Moment der Anfrage, erstellt werden und muss nicht bereits statisch (etwa in Form einer HTML-Seite) für den Webserver verfügbar sein.Als Jakarta Servlet (früher Java Servlet) bezeichnet man Java-Klassen, deren Instanzen innerhalb eines Webservers Anfragen von Clients entgegennehmen und beantworten. Der Inhalt der Antworten kann dabei dynamisch, also im Moment der Anfrage, erstellt werden und muss nicht bereits statisch (etwa in Form einer HTML-Seite) für den Webserver verfügbar sein. https://de.wikipedia.org/wiki/Jakarta_Servlet[wikipedia^]
+* Als Jakarta Servlet (früher Java Servlet) bezeichnet man Java-Klassen, deren Instanzen innerhalb eines Webservers Anfragen von Clients entgegennehmen und beantworten.
+Der Inhalt der Antworten kann dabei dynamisch, also im Moment der Anfrage, erstellt werden und muss nicht bereits statisch (etwa in Form einer HTML-Seite) für den Webserver verfügbar sein.Als Jakarta Servlet (früher Java Servlet) bezeichnet man Java-Klassen, deren Instanzen innerhalb eines Webservers Anfragen von Clients entgegennehmen und beantworten.
+Der Inhalt der Antworten kann dabei dynamisch, also im Moment der Anfrage, erstellt werden und muss nicht bereits statisch (etwa in Form einer HTML-Seite) für den Webserver verfügbar sein. https://de.wikipedia.org/wiki/Jakarta_Servlet[wikipedia^]
 * mit einem Pfad wird es aktiviert
-
-
 
 === Übung Mikroprojekt
 
@@ -546,7 +550,6 @@ image::https://media.geeksforgeeks.org/wp-content/uploads/20230714113547/Excepti
 * Lesen Sie diese Objekte vorher aus einer Datei ein.
 . Erstellen Sie weiters dazugehörige rest-assured-Integrations-Tests
 * Termin: 21.10.2023 20:00
-
 
 == 2023-10-23
 
@@ -569,12 +572,12 @@ testcontainers.reuse.enable=true
 == Feedback Miniprojekt
 
 * siehe Aichinger
-** Dependency Injection vs. Singleton Pattern
+** Dependency Injection vs.
+Singleton Pattern
 
 * Offene Fragen
 ** Separation of concerns
-*** siehe Ken Fogel, Transitioning to Java-Kickstart your polyglot programming journey by getting a clear
-understanding of Java, packt, 2023
+*** siehe Ken Fogel, Transitioning to Java-Kickstart your polyglot programming journey by getting a clear understanding of Java, packt, 2023
 *** https://dev.to/tamerlang/separation-of-concerns-the-simple-way-4jp2
 
 ** Lambda-Expressions?
@@ -715,9 +718,7 @@ class Repository {
 }
 ----
 
-
 == 2023-11-13
-
 
 Zustände eines Objekts:
 
@@ -728,12 +729,14 @@ image::states-of-object.png[width=500]
 === Arten von REST-Parameter
 
 * Path-Parameter
+
 [source,httprequest]
 ----
 GET https://example.com/users/104
 ----
 
 * Query-Parameter
+
 [source,httprequest]
 ----
 GET https://example.com/users?size=10&offset=20
@@ -801,7 +804,8 @@ Möglichkeit 1: Table per Class -> für alle Unterklassen eine eigene Tabelle
 |===
 
 Implementierung in Quarkus:
-[source, java]
+
+[source,java]
 ----
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class PKW {
@@ -821,7 +825,8 @@ Möglichkeit 2: Single Table -> eine Tablle für die Basisklasse, wo auch die At
 |===
 
 Implementierung in Quarkus:
-[source, java]
+
+[source,java]
 ----
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Fahrzeug {
@@ -829,17 +834,13 @@ public class Fahrzeug {
 }
 ----
 
-
 == 2023-11-20
 //Bajtik Berg
-Möglichkeit 3: JOINED -> Attribute der Basisklasse in einer
-Tabelle und je eine Tabelle pro
-abgeleiteter Klasse (mit
-Diskriminator* DTYPE)
+Möglichkeit 3: JOINED -> Attribute der Basisklasse in einer Tabelle und je eine Tabelle pro abgeleiteter Klasse (mit Diskriminator* DTYPE)
 
 __*Diskriminator = Unterscheidungsmerkmal__
 
-[source, java]
+[source,java]
 ----
 @Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Kfz {
@@ -848,6 +849,7 @@ public abstract class Kfz {
 ----
 
 === Panache
+
 * Hibernate ORM, am meisten verbreitetste JPA Implementierung
 * Erlaubt detailliert konfigurierbares und komplexes OR-Mapping
 * Jedoch nicht wirklich einfach zu verwenden weil ziemlich trivial
@@ -919,8 +921,7 @@ Zugriff mittels klassischem JPA:
 * Nachteile
 ** Felder __private__
 ** generierte Getter und Setter machen unnötig viel Code
-** Methoden für Standard-Zugriffe werden immer wieder neu implementiert
-(zB Count, ...)
+** Methoden für Standard-Zugriffe werden immer wieder neu implementiert (zB Count, ...)
 
 -> Panache macht das einfacher
 
@@ -938,21 +939,25 @@ werden auch bei Feldzugriff automatisch verwendet
 *** Extend PanacheEntity (default ID)
 
 == 2023-11-21
+
 Autor: Moritz Gruber
 
 === Query mit 300 000 Zeilen
+
 * `paging`: Ergebniszeilen werden in Seiten mit XX Zeilen aufgeteilt.
 ** offset: gibt an wie viele Elemente ausgelassen werden
 ** limit: gibt an wie viele Elemente man ab dem offset bekommt
 ** BSP:
 *** 1. Page hat Offset 0 und Limit 100
 *** 2. Page hat Offset 100 und Limit 100
-* `stream`: Man bekommt Ergebnisse Stück für Stück und nicht auf einmal. Somit kann man mit den bereits erhaltenen Daten gleich weiterarbeiten.
+* `stream`: Man bekommt Ergebnisse Stück für Stück und nicht auf einmal.
+Somit kann man mit den bereits erhaltenen Daten gleich weiterarbeiten.
 
 === Count in einer Query
+
 * BSP: Zählen der Männer eines Unternehmens
 
-[source, sql]
+[source,sql]
 ----
 --Richtig
 SELECT count(*) FROM EMP WHERE lower(sex)='male';
@@ -966,6 +971,7 @@ IMPORTANT: Mit der Aggregatsfunktion count zählen und nicht im Code!
 === Übung für WMC-Test
 
 ==== Setup Project
+
 * Dependencies in der pom.xml hinzufügen
 ** quarkus-resteasy-reactive-jackson
 ** quarkus-resteasy-reactive
@@ -977,7 +983,7 @@ IMPORTANT: Mit der Aggregatsfunktion count zählen und nicht im Code!
 
 * link:http://edufs.edu.htl-leonding.ac.at/~t.stuetz/download/nvs/scripts/[download-derbydb-and-jdk.sh] in das Repository kopieren und ausführen
 
-[source, bash]
+[source,bash]
 ----
 chmod u+x download-derbydb-and-jdk.sh
 ./download-derbydb-and-jdk.sh
@@ -987,7 +993,7 @@ chmod u+x download-derbydb-and-jdk.sh
 
 * `derbydb-start.sh` ausführen um die DB zu starten
 
-[source, bash]
+[source,bash]
 ----
 ./derbydb-start.sh
 ----
@@ -997,6 +1003,7 @@ chmod u+x download-derbydb-and-jdk.sh
 * Neue Datasource mit `Import from Clipboard` erstellen
 
 ==== Verzeichnisstruktur
+
 * main/java
 ** at.htl.book.entity
 *** Author
@@ -1014,7 +1021,8 @@ chmod u+x download-derbydb-and-jdk.sh
 *** BookRepositoryTest
 
 ==== Entity
-[source, java]
+
+[source,java]
 ----
 @Entity
 @Table(name = "LIB_AUTHOR") //<.>
@@ -1042,12 +1050,14 @@ public class Author {
     //toString() here
 }
 ----
+
 <1> Hier wird der Name der Tabelle in der DB festgelegt
 <2> Hier werden Queries mit Namen definiert, welche später unter diesen Namen verwendet werden können
 <3> Wird zum Generieren der ID benötigt
 
 ==== Repository
-[source, java]
+
+[source,java]
 ----
 @ApplicationScoped //<.>
 public class AuthorRepository {
@@ -1059,13 +1069,14 @@ public class AuthorRepository {
     }
 }
 ----
+
 <1> Es wird nur eine Instanz von AuthorRepository für die Dauer der gesamten Anwendung erstellt
 <2> Der EntityManager vereinfacht die Persistierung von Java Objekten in einer relationalen DB
 <3> Merge persistiert ein Java Objekt, falls es noch nicht existiert, falls es jedoch existiert wird es in der DB aktualisiert
 
 ==== RepositoryTest
 
-[source, java]
+[source,java]
 ----
 @QuarkusTest //<.>
 class AuthorRepositoryTest {
@@ -1089,6 +1100,7 @@ class AuthorRepositoryTest {
     }
 }
 ----
+
 <1> Damit Dependency-Injection in der Testklasse funktioniert
 <2> Die Datasource der DB wird durch Dependency-Injection injectet
 <3> Eine neue Table (assertj-db) des aktuellen Standes der Tabelle LIB_AUTHOR wird erstellt
@@ -1108,7 +1120,6 @@ class AuthorRepositoryTest {
 * JP-QL - Queries
 * SQL - Queries -> NativeQueries
 
-
 == 2024-01-08
 
 * Think your product
@@ -1116,7 +1127,6 @@ class AuthorRepositoryTest {
 == 2024-01-09
 
 * Stundentausch wegen "Think your product".
-
 
 == 2024-01-15
 
@@ -1130,7 +1140,6 @@ image::panache-overview.png[]
 ==== Transaktionen
 
 * keine Trnsaktionen im Repository
-
 
 === Qute
 
@@ -1174,21 +1183,15 @@ image::panache-overview.png[]
 ** https://htl-leonding-college.github.io/quarkus-lecture-notes/qute.html
 ** https://quarkus.io/guides/qute-reference[Qute Reference Guide]
 
-
 == WebSockets
 
 * siehe vehicle-panache
 
 include::android.adoc
 
-
-
-
 == 2024-01-05
 
 === REST-Client
-
-
 
 == 2024-02-12
 
@@ -1206,6 +1209,162 @@ include::android.adoc
 ** Erstellen Sie einen Quarkus Client mit Qute, der Ihre momentane Position in einer OSM-Map anzeigt
 ** Speichern Sie in der Datenbank Ihre Positions-Historie
 
+== 2024-03-18
 
+=== Domain Object Model (DOM)
 
+A domain object model is a class diagramm without any "technical" classes like "Repository", "Service", "Controller", "DAO", ...
 
+=== Document Object Model (DOM)
+
+The Document Object Model is a cross-platform and language-independent interface that treats an HTML or XML document as a tree structure wherein each node is an object representing a part of the document.
+The DOM represents a document with a logical tree.
+
+image::symbolic-dom.png[Symbolic DOM]
+
+image:dom-in-browser.png[DOM in a browser]
+
+=== Functional Programming Paradigm
+
+Functional programming is a declarative paradigm that emphasizes pure mathematical functions over imperative methods.
+It prioritizes "what to solve" rather than "how to solve" and employs expressions instead of statements, with functions possessing unique characteristics.
+
+Programming Languages that support functional programming:
+
+* Haskell
+* JavaScript
+* Python
+* Scala
+* Erlang
+* Lisp
+* ML
+* Clojure
+* OCaml
+* Common Lisp
+* Racket
+
+=== Pure Functions
+
+A pure function is a function where the return value is only determined by its input values, without observable side effects.
+This is how functions in math work: Math.cos(x) will, for the same value of x, always return the same result.
+
+It minds its own business.
+It does not change any objects or variables that existed before it was called.
+Same inputs, same output.
+
+=== Android Architecture (presented by Linus Nestler)
+
+==== BehaviourSubject
+
+BehaviorSubjects are a type of Subject that: Has an initial value.
+Subscribers will receive the last emitted value upon subscription
+
+==== Model
+
+One central model which is used by the whole application ("single source of truth").
+It contains the data of the application.
+
+==== Store
+
+It is responsible for managing the state of the application and for providing the data to the UI.
+
+The MainView subscribes to the store and gets the data from it.
+
+The store has a function which is called `next` and it is used to update the state of the application.
+
+==== Producer
+
+A producer is a class that is responsible for providing the data to the UI.
+
+|===
+|Chore |Status
+
+|Produce
+|True
+
+|Consume
+|False
+|===
+
+==== Function
+
+Functions both consume and produce data.
+
+|===
+|Chore |Status
+
+|Produce
+|True
+
+|Consume
+|True
+|===
+
+==== Consumer
+
+A consumer is a class that is responsible for consuming the data from the UI.
+
+*Example:*
+
+The user selects a device to connect to via Bluetooth.
+The store then consumes the device.
+
+`onClick` event:
+
+[source,kotlin]
+----
+store.next { it.btConnection.selectedDevice = device }
+----
+
+|===
+|Chore |Status
+
+|Produce
+|False
+
+|Consume
+|True
+|===
+
+=== Jetpack Compose
+
+Jetpack Compose is a modern toolkit for building native Android UI.
+Jetpack Compose simplifies and accelerates UI development on Android with less code, powerful tools, and intuitive *Kotlin* APIs.
+
+==== Getting Started
+
+You can find a tutorial https://developer.android.com/jetpack/compose/setup[here] and https://developer.android.com/jetpack/compose/tutorial[here].
+
+The test project is also available in the lecture notes https://github.com/2324-4bhif-wmc/2324-4bhif-wmc-lecture-notes[repository]
+where the kotlin build system was used.
+
+==== Composable Functions
+
+A composable function is a function that can be called by the UI framework to render the UI.
+It is a Kotlin function annotated with `@Composable`.
+This annotation tells the Compose compiler that the functions are meant for UI construction.
+
+These are the only functions that have a capital letter at the beginning of their name.
+They are outside any class and therefore are top-level functions.
+
+=== Groovy
+
+Apache Groovy is a Java-syntax-compatible object-oriented programming language for the Java platform. It is both a static and dynamic language with features similar to those of Python, Ruby, and Smalltalk.
+
+=== Java’s Records vs Kotlin’s Data Classes
+
+https://medium.com/javarevisited/javas-records-vs-kotlin-s-data-classes-b3fef851155a[This] article explains the differences between Java's Records and Kotlin's Data Classes.
+
+*tl;dr*: Kotlin's Data Classes are roughly equivalent to Java's Records.
+
+=== Frontend
+
+==== Material Design
+
+https://m3.material.io/[Material Design] is a design language developed by Google. The website has many useful tips and tricks for designing a frontend.
+
+==== Flutter
+
+Flutter is an open source framework developed and supported by Google. Frontend and full-stack developers use Flutter to build an application’s user interface (UI) for multiple platforms with a single codebase.
+
+When Flutter launched in 2018, it mainly supported mobile app development. Flutter now supports application development on six platforms: iOS, Android, the web, Windows, MacOS, and Linux.
