@@ -1357,4 +1357,12 @@ https://medium.com/javarevisited/javas-records-vs-kotlin-s-data-classes-b3fef851
 
 *tl;dr*: Kotlin's Data Classes are roughly equivalent to Java's Records.
 
+=== Frontend
 
+==== Material Design
+
+https://m3.material.io/[Material Design] is a design language developed by Google. The website has many useful tips and tricks for designing a frontend.
+
+==== Flutter
+
+Flutter is an open-source UI software development kit created by Google. It is used to develop cross platform applications from a single codebase for any web browser, Fuchsia, Android, iOS, Linux, macOS, and Windows.
