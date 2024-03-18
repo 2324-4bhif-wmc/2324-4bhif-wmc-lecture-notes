@@ -1325,3 +1325,36 @@ store.next { it.btConnection.selectedDevice = device }
 |Consume
 |True
 |===
+
+=== Jetpack Compose
+
+Jetpack Compose is a modern toolkit for building native Android UI.
+Jetpack Compose simplifies and accelerates UI development on Android with less code, powerful tools, and intuitive *Kotlin* APIs.
+
+==== Getting Started
+
+You can find a tutorial https://developer.android.com/jetpack/compose/setup[here] and https://developer.android.com/jetpack/compose/tutorial[here].
+
+The test project is also available in the lecture notes https://github.com/2324-4bhif-wmc/2324-4bhif-wmc-lecture-notes[repository]
+where the kotlin build system was used.
+
+==== Composable Functions
+
+A composable function is a function that can be called by the UI framework to render the UI.
+It is a Kotlin function that is annotated with @Composable.
+This annotation tells the Compose compiler that the functions is meant for UI construction.
+
+These are the only functions which have a capital letter at the beginning of their name.
+They are outside any class and are top-level functions.
+
+=== Groovy
+
+Apache Groovy is a Java-syntax-compatible object-oriented programming language for the Java platform. It is both a static and dynamic language with features similar to those of Python, Ruby, and Smalltalk.
+
+=== Java’s Records vs Kotlin’s Data Classes
+
+https://medium.com/javarevisited/javas-records-vs-kotlin-s-data-classes-b3fef851155a[This] article explains the differences between Java's Records and Kotlin's Data Classes.
+
+*tl;dr*: Kotlin's Data Classes are roughly equivalent to Java's Records.
+
+
