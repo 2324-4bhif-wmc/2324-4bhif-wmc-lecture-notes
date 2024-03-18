@@ -1217,8 +1217,111 @@ A domain object model is a class diagramm without any "technical" classes like "
 
 === Document Object Model (DOM)
 
-The Document Object Model is a cross-platform and language-independent interface that treats an HTML or XML document as a tree structure wherein each node is an object representing a part of the document. The DOM represents a document with a logical tree.
+The Document Object Model is a cross-platform and language-independent interface that treats an HTML or XML document as a tree structure wherein each node is an object representing a part of the document.
+The DOM represents a document with a logical tree.
 
 image::symbolic-dom.png[Symbolic DOM]
 
 image:dom-in-browser.png[DOM in a browser]
+
+=== Functional Programming Paradigm
+
+Functional programming is a declarative paradigm that emphasizes pure mathematical functions over imperative methods.
+It prioritizes "what to solve" rather than "how to solve" and employs expressions instead of statements, with functions possessing unique characteristics.
+
+Programming Languages that support functional programming:
+
+* Haskell
+* JavaScript
+* Python
+* Scala
+* Erlang
+* Lisp
+* ML
+* Clojure
+* OCaml
+* Common Lisp
+* Racket
+
+=== Pure Functions
+
+A pure function is a function where the return value is only determined by its input values, without observable side effects.
+This is how functions in math work: Math.cos(x) will, for the same value of x, always return the same result.
+
+It minds its own business.
+It does not change any objects or variables that existed before it was called.
+Same inputs, same output.
+
+=== Android Architecture (presented by Linus Nestler)
+
+==== BehaviourSubject
+
+BehaviorSubjects are a type of Subject that: Has an initial value.
+Subscribers will receive the last emitted value upon subscription
+
+==== Model
+
+One central model which is used by the whole application ("single source of truth").
+It contains the data of the application.
+
+==== Store
+
+It is responsible for managing the state of the application and for providing the data to the UI.
+
+The MainView subscribes to the store and gets the data from it.
+
+The store has a function which is called `next` and it is used to update the state of the application.
+
+==== Producer
+
+A producer is a class that is responsible for providing the data to the UI.
+
+|===
+|Chore |Status
+
+|Produce
+|True
+
+|Consume
+|False
+|===
+
+==== Function
+
+A function both consumes and produces data.
+
+|===
+|Chore |Status
+
+|Produce
+|True
+
+|Consume
+|True
+|===
+
+==== Consumer
+
+A consumer is a class that is responsible for consuming the data from the UI.
+
+*Example:*
+
+The user selects a device to connect to via Bluetooth.
+The device is then consumed by the store.
+
+`onClick` event:
+
+[source,kotlin]
+----
+store.next { it.btConnection.selectedDevice = device }
+----
+
+|===
+|Chore |Status
+
+|Produce
+|False
+
+|Consume
+|True
+|===
