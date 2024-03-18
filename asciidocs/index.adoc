@@ -1288,7 +1288,7 @@ A producer is a class that is responsible for providing the data to the UI.
 
 ==== Function
 
-A function both consumes and produces data.
+Functions both consume and produce data.
 
 |===
 |Chore |Status
@@ -1307,7 +1307,7 @@ A consumer is a class that is responsible for consuming the data from the UI.
 *Example:*
 
 The user selects a device to connect to via Bluetooth.
-The device is then consumed by the store.
+The store then consumes the device.
 
 `onClick` event:
 
@@ -1341,11 +1341,11 @@ where the kotlin build system was used.
 ==== Composable Functions
 
 A composable function is a function that can be called by the UI framework to render the UI.
-It is a Kotlin function that is annotated with @Composable.
-This annotation tells the Compose compiler that the functions is meant for UI construction.
+It is a Kotlin function annotated with `@Composable`.
+This annotation tells the Compose compiler that the functions are meant for UI construction.
 
-These are the only functions which have a capital letter at the beginning of their name.
-They are outside any class and are top-level functions.
+These are the only functions that have a capital letter at the beginning of their name.
+They are outside any class and therefore are top-level functions.
 
 === Groovy
 
