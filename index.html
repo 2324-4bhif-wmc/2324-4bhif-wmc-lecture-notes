@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.21">
+<meta name="generator" content="Asciidoctor 2.0.22">
 <link rel="icon" type="image/png" href="themes/favicon.png">
 <title>23/24 4bhif wmc - Lecture Notes</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -650,25 +650,44 @@ pre.rouge .gs {
 </ul>
 </li>
 <li><a href="#_websockets">19. WebSockets</a></li>
-<li><a href="#_2024_01_05">20. 2024-01-05</a>
+<li><a href="#_2324_4bhif_wmc_android_lecture_notes">23/24 4bhif wmc - Android Lecture Notes</a>
+<ul class="sectlevel1">
+<li><a href="#_2024_01_23">1. 2024-01-23</a>
 <ul class="sectlevel2">
-<li><a href="#_rest_client_2">20.1. REST-Client</a></li>
+<li><a href="#_activity_life_cycle">1.1. Activity Life Cycle</a></li>
+<li><a href="#_di">1.2. DI</a></li>
+<li><a href="#_mvvm">1.3. MVVM</a></li>
 </ul>
 </li>
-<li><a href="#_2024_02_12">21. 2024-02-12</a>
+<li><a href="#_2024_01_30">2. 2024-01-30</a>
 <ul class="sectlevel2">
-<li><a href="#_mqtt">21.1. MQTT</a></li>
+<li><a href="#deep_copy">2.1. Deep Copy</a></li>
+<li><a href="#shallow_copy">2.2. Shallow Copy</a></li>
+<li><a href="#_composable">2.3. Composable</a></li>
+<li><a href="#_preview">2.4. Preview</a></li>
 </ul>
 </li>
-<li><a href="#_2024_03_19">22. 2024-03-19</a>
+<li><a href="#_2024_01_05">3. 2024-01-05</a>
 <ul class="sectlevel2">
-<li><a href="#_state_and_jetpack_compose">22.1. State and Jetpack Compose</a></li>
-<li><a href="#_viewmodelprovider">22.2. ViewModelProvider</a></li>
-<li><a href="#_mutablelivedata">22.3. MutableLiveData</a></li>
-<li><a href="#_promise">22.4. Promise</a></li>
+<li><a href="#_rest_client_2">3.1. REST-Client</a></li>
 </ul>
 </li>
-<li><a href="#_compose">23. Compose</a></li>
+<li><a href="#_2024_02_12">4. 2024-02-12</a>
+<ul class="sectlevel2">
+<li><a href="#_mqtt">4.1. MQTT</a></li>
+</ul>
+</li>
+<li><a href="#_2024_03_19">5. 2024-03-19</a>
+<ul class="sectlevel2">
+<li><a href="#_state_and_jetpack_compose">5.1. State and Jetpack Compose</a></li>
+<li><a href="#_viewmodelprovider">5.2. ViewModelProvider</a></li>
+<li><a href="#_mutablelivedata">5.3. MutableLiveData</a></li>
+<li><a href="#_promise">5.4. Promise</a></li>
+</ul>
+</li>
+<li><a href="#_compose">6. Compose</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -2794,25 +2813,327 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </li>
 </ul>
 </div>
+</div>
+</div>
+<h1 id="_2324_4bhif_wmc_android_lecture_notes" class="sect0"><a class="anchor" href="#_2324_4bhif_wmc_android_lecture_notes"></a>23/24 4bhif wmc - Android Lecture Notes</h1>
 <div class="paragraph">
-<p>include::android.adoc</p>
+<p><span class="icon"><a class="image" href="https://github.com/2324-4bhif-wmc/2324-4bhif-wmc-lecture-notes/main/asciidocs/index.adoc"><i class="fa fa-file-text-o"></i></a></span> ‏ ‏ ‎
+<span class="icon"><a class="image" href="https://github.com/2324-4bhif-wmc/2324-4bhif-wmc-lecture-notes"><i class="fa fa-github-square"></i></a></span> ‏ ‏ ‎
+<span class="icon"><a class="image" href="http://edufs.edu.htl-leonding.ac.at/~t.stuetz/hugo/2021/01/lecture-notes/"><i class="fa fa-home"></i></a></span></p>
+</div>
+<div class="sect1">
+<h2 id="_2024_01_23"><a class="anchor" href="#_2024_01_23"></a>1. 2024-01-23</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/mvc.png" alt="mvc">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Wir verwenden Kotlin für das Frontend</p>
+</li>
+<li>
+<p>Für die Business Logik wird Java verwendet.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_activity_life_cycle"><a class="anchor" href="#_activity_life_cycle"></a>1.1. Activity Life Cycle</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://developer.android.com/guide/components/activities/activity-lifecycle" class="bare">https://developer.android.com/guide/components/activities/activity-lifecycle</a></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/android-life-cycle.png" alt="android life cycle">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_di"><a class="anchor" href="#_di"></a>1.2. DI</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://developer.android.com/training/dependency-injection/hilt-android" class="bare">https://developer.android.com/training/dependency-injection/hilt-android</a></p>
+</li>
+<li>
+<p>In Hilt Constructor - Injection</p>
+</li>
+<li>
+<p>In Quarkus eher field Injection</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mvvm"><a class="anchor" href="#_mvvm"></a>1.3. MVVM</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/android-mvvm.png" alt="android mvvm">
+</div>
+<div class="title">Figure 6. source: <a href="https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/l2.pdf">Stanford CS193p (2023)</a></div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://cs193p.sites.stanford.edu/2023">Stanford CS193p - Developing Apps for iOS - Videomitschnitt</a></p>
+</li>
+<li>
+<p><a href="https://cs193p.sites.stanford.edu/sites/g/files/sbiybj16636/files/media/file/l1.pdf">Stanford CS193p - Developing Apps for iOS - Foliensatz MVVM</a></p>
+</li>
+<li>
+<p><a href="https://redux.js.org/understanding/thinking-in-redux/three-principles">Three Principles</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Single source of truth</p>
+</li>
+<li>
+<p>State is read-only</p>
+</li>
+<li>
+<p>Changes are made with pure functions</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://rxmarbles.com/#map" class="bare">https://rxmarbles.com/#map</a></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/android-obervables.png" alt="android obervables">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/caberger/swift-tutorial/blob/master/examples/android/hello-world/application/app/build.gradle.kts" class="bare">https://github.com/caberger/swift-tutorial/blob/master/examples/android/hello-world/application/app/build.gradle.kts</a></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/android-pure-functions.png" alt="android pure functions">
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_2024_01_05"><a class="anchor" href="#_2024_01_05"></a>20. 2024-01-05</h2>
+<h2 id="_2024_01_30"><a class="anchor" href="#_2024_01_30"></a>2. 2024-01-30</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mit subject.onNext wird dem Observer ein neuer Wert zum "Beobachten" gegeben</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="../labs/MyFirstApp/app/src/main/java/at/ac/htl/myfirstapp/model/Store.java" target="_blank" rel="noopener">Store</a></div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">next</span><span class="o">(</span><span class="nc">Consumer</span><span class="o">&lt;</span><span class="nc">Model</span><span class="o">&gt;</span> <span class="n">recipe</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Model</span> <span class="n">model</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">clone</span><span class="o">(</span><span class="n">subject</span><span class="o">.</span><span class="na">getValue</span><span class="o">());</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="n">recipe</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">model</span><span class="o">);</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="n">subject</span><span class="o">.</span><span class="na">onNext</span><span class="o">(</span><span class="n">model</span><span class="o">);</span> <i class="conum" data-value="3"></i><b>(3)</b>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>hier wird das derzeitige Model <a href="#deep_copy">tief kopiert</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Das Model wird nun durch einen Consumer, der bei Aufruf der Methode mitgegeben wird, verändert.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Nun bekommt jeder Observer durch die Methode onNext das neue Model.</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="deep_copy"><a class="anchor" href="#deep_copy"></a>2.1. Deep Copy</h3>
+<div class="paragraph">
+<p>Bei einem Deep Copy (= tiefer Kopie) geht es darum, ein Object zu klonen, ohne referenzen des alten objects zu übertragen.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/shallow-copy-deep-copy.png" alt="shallow copy deep copy">
+</div>
+</div>
+<div class="paragraph">
+<p>Ein Deep Copy ist im Vergleich zu einem <a href="#shallow_copy">Shallow Copy</a> sehr Ressourcenaufwendig, da durch jede Referenz auf ein anderes Objekt das andere Objekt selbst tief kopiert werden muss.</p>
+</div>
+<div class="paragraph">
+<p>Wenn man ein Deep Copy durch JSON serialisierung implementiert, schaut dies folgendermaßen aus:</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="../labs/MyFirstApp/app/src/main/java/at/ac/htl/myfirstapp/model/ModelMapper.java" target="_blank" rel="noopener">ModelMapper</a></div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ModelMapper</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="nc">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">();</span> <i class="conum" data-value="1"></i><b>(1)</b>
+    <span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">classType</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">ModelMapper</span><span class="o">(</span><span class="nc">Class</span><span class="o">&lt;?</span> <span class="kd">extends</span> <span class="no">T</span><span class="o">&gt;</span> <span class="n">classType</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">classType</span> <span class="o">=</span> <span class="n">classType</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="no">T</span> <span class="nf">clone</span><span class="o">(</span><span class="no">T</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">fromResource</span><span class="o">(</span><span class="n">toResource</span><span class="o">(</span><span class="n">model</span><span class="o">));</span> <i class="conum" data-value="2"></i><b>(2)</b>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">toResource</span><span class="o">(</span><span class="no">T</span> <span class="n">model</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="na">writeValueAsBytes</span><span class="o">(</span><span class="n">model</span><span class="o">);</span> <i class="conum" data-value="3"></i><b>(3)</b>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">JsonProcessingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">CompletionException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="no">T</span> <span class="nf">fromResource</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="na">readValue</span><span class="o">(</span><span class="n">bytes</span><span class="o">,</span> <span class="n">classType</span><span class="o">);</span> <i class="conum" data-value="4"></i><b>(4)</b>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">CompletionException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Hier wird ein ObjectMapper von Jackson für die durchführung der JSON initialisierung erstellt</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Wenn man Objekt zuerst zu einem String macht und den String dann wieder zu einem Objekt macht ist das resultat ein neues Objekt, das von den Referenzen nichts mit dem anfangs Objekt zu tun hat</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Hier wird das Objekt zu einem String (ByteArray) gemacht</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Hier wird der String (ByteArray) wieder zu einem Objekt gemacht. Um nun auch auf die richtige Klasse zu kommen wird dem ObjectMapper eine Klasse mitgegeben die im Konstruktor des ModelMappers übergeben worden ist.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="shallow_copy"><a class="anchor" href="#shallow_copy"></a>2.2. Shallow Copy</h3>
+<div class="paragraph">
+<p>Ein Shallow Copy (= seichte Kopie) geht nicht so "tief" in den Kopie vorgang, wie ein <a href="#deep_copy">Deep Copy</a> und macht nur ein neues Objekt mit den Werten des alten Objekts verwendet dabei aber die gleichen referenzen wie das alte Objekt auf weitere Objekte</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_composable"><a class="anchor" href="#_composable"></a>2.3. Composable</h3>
+<div class="paragraph">
+<p>In einer Methode die mit @Composable annotiert ist, definiert man eine View.</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="../labs/MyFirstApp/app/src/main/java/at/ac/htl/myfirstapp/ui/layout/MainView.kt" target="_blank" rel="noopener">MainView</a></div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">Greeting</span><span class="p">(</span><span class="n">store</span><span class="p">:</span> <span class="nc">Store</span><span class="p">,</span> <span class="n">modifier</span><span class="p">:</span> <span class="nc">Modifier</span> <span class="p">=</span> <span class="nc">Modifier</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">state</span> <span class="p">=</span> <span class="n">store</span><span class="p">.</span><span class="n">subject</span><span class="p">.</span><span class="nf">subscribeAsState</span><span class="p">(</span><span class="n">initial</span> <span class="p">=</span> <span class="nc">Model</span><span class="p">())</span>
+    <span class="nc">Column</span> <span class="p">{</span> <i class="conum" data-value="1"></i><b>(1)</b>
+        <span class="nc">Text</span><span class="p">(</span> <i class="conum" data-value="2"></i><b>(2)</b>
+            <span class="n">text</span> <span class="p">=</span> <span class="s">"Hello ${state.value.greeting}!"</span><span class="p">,</span>
+            <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span>
+        <span class="p">)</span>
+        <span class="nc">Text</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="s">"Zweite Zeile"</span><span class="p">)</span>
+        <span class="nc">Button</span><span class="p">(</span><span class="n">onClick</span> <span class="p">=</span> <span class="p">{</span> <i class="conum" data-value="3"></i><b>(3)</b>
+            <span class="nc">Log</span><span class="p">.</span><span class="nf">i</span><span class="p">(</span><span class="nc">TAG</span><span class="p">,</span> <span class="s">"geclickt"</span><span class="p">)</span>
+            <span class="n">store</span><span class="p">.</span><span class="nf">next</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">greeting</span> <span class="p">=</span> <span class="s">"I was clicked"</span> <span class="p">}</span>
+        <span class="p">})</span> <span class="p">{</span>
+            <span class="nc">Text</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="s">"save"</span><span class="p">)</span> <i class="conum" data-value="4"></i><b>(4)</b>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In einer solchen Composable Methode kann man auf Composables wie Column oder Button zugreifen.</p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Eine Column definiert, eine Vertikale Liste an Composables</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Mit einem Text kann man in seine View durch das Attribut text einen Text einbinden</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Ein Button definiert einen Knopf, auf den man drücken kann, außerdem kann man auch gleich mit dem Attribut onClick eine Funktion schreiben die ausgeführt wird, wenn man den Knopf drückt</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>In einem Button kann man dann weitere Composables benutzen wie zum Beispiel einen Text der im Button angezeigt wird.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Diese View würde so ausschauen:</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/composable-bsp.png" alt="composable bsp"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_preview"><a class="anchor" href="#_preview"></a>2.4. Preview</h3>
+<div class="paragraph">
+<p>Um zu sehen, wie eine View ausschaut, ohne die ganze App zu starten, kann man eine Preview Composable machen:</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="../labs/MyFirstApp/app/src/main/java/at/ac/htl/myfirstapp/ui/layout/MainView.kt" target="_blank" rel="noopener">MainView</a></div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="nd">@Preview</span><span class="p">(</span><span class="n">showBackground</span> <span class="p">=</span> <span class="k">true</span><span class="p">)</span>
+<span class="nd">@Composable</span>
+<span class="k">fun</span> <span class="nf">GreetingPreview</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">store</span> <span class="p">=</span> <span class="nc">Store</span><span class="p">()</span>
+
+    <span class="nc">MyFirstAppTheme</span> <span class="p">{</span>
+        <span class="nc">Greeting</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>mit dieser kann man sich ganz einfach in der IDE anzeigen lassen wie eine solche View, in diesem Fall Greeting, ausschaut.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/preview.png" alt="preview"></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2024_01_05"><a class="anchor" href="#_2024_01_05"></a>3. 2024-01-05</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_rest_client_2"><a class="anchor" href="#_rest_client_2"></a>20.1. REST-Client</h3>
+<h3 id="_rest_client_2"><a class="anchor" href="#_rest_client_2"></a>3.1. REST-Client</h3>
 
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_2024_02_12"><a class="anchor" href="#_2024_02_12"></a>21. 2024-02-12</h2>
+<h2 id="_2024_02_12"><a class="anchor" href="#_2024_02_12"></a>4. 2024-02-12</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_mqtt"><a class="anchor" href="#_mqtt"></a>21.1. MQTT</h3>
+<h3 id="_mqtt"><a class="anchor" href="#_mqtt"></a>4.1. MQTT</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2827,7 +3148,7 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </ul>
 </div>
 <div class="sect3">
-<h4 id="_übung_owntracks"><a class="anchor" href="#_übung_owntracks"></a>21.1.1. Übung OwnTracks</h4>
+<h4 id="_übung_owntracks"><a class="anchor" href="#_übung_owntracks"></a>4.1.1. Übung OwnTracks</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2853,7 +3174,7 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </div>
 </div>
 <div class="sect1">
-<h2 id="_2024_03_19"><a class="anchor" href="#_2024_03_19"></a>22. 2024-03-19</h2>
+<h2 id="_2024_03_19"><a class="anchor" href="#_2024_03_19"></a>5. 2024-03-19</h2>
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
@@ -2876,7 +3197,7 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_state_and_jetpack_compose"><a class="anchor" href="#_state_and_jetpack_compose"></a>22.1. State and Jetpack Compose</h3>
+<h3 id="_state_and_jetpack_compose"><a class="anchor" href="#_state_and_jetpack_compose"></a>5.1. State and Jetpack Compose</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2887,7 +3208,7 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mymWGMy9pYI?si=FyJcSDGSALbkCZrh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 <div class="sect2">
-<h3 id="_viewmodelprovider"><a class="anchor" href="#_viewmodelprovider"></a>22.2. ViewModelProvider</h3>
+<h3 id="_viewmodelprovider"><a class="anchor" href="#_viewmodelprovider"></a>5.2. ViewModelProvider</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2900,7 +3221,7 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_mutablelivedata"><a class="anchor" href="#_mutablelivedata"></a>22.3. MutableLiveData</h3>
+<h3 id="_mutablelivedata"><a class="anchor" href="#_mutablelivedata"></a>5.3. MutableLiveData</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2913,7 +3234,7 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </div>
 </div>
 <div class="sect2">
-<h3 id="_promise"><a class="anchor" href="#_promise"></a>22.4. Promise</h3>
+<h3 id="_promise"><a class="anchor" href="#_promise"></a>5.4. Promise</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2957,7 +3278,7 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </div>
 </div>
 <div class="sect1">
-<h2 id="_compose"><a class="anchor" href="#_compose"></a>23. Compose</h2>
+<h2 id="_compose"><a class="anchor" href="#_compose"></a>6. Compose</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -2974,7 +3295,7 @@ Mit der Aggregatsfunktion count zählen und nicht im Code!
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-19 13:35:41 UTC
+Last updated 2024-04-05 08:22:19 UTC
 </div>
 </div>
 </body>
