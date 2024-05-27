@@ -3344,14 +3344,78 @@ ng g c components/todo</pre>
 <li>
 <p><a href="https://github.com/caberger/android" target="_blank" rel="noopener">Repo Prof. Aberger Android</a></p>
 </li>
+<li>
+<p><a href="https://github.com/coil-kt/coil" class="bare">https://github.com/coil-kt/coil</a></p>
+</li>
+<li>
+<p><a href="https://github.com/bumptech/glide" class="bare">https://github.com/bumptech/glide</a></p>
+</li>
 </ul>
+</div>
+<div class="listingblock">
+<div class="title">docker-compose.yaml</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="yaml"><span class="na">services</span><span class="pi">:</span>
+  <span class="na">postgres</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">postgres_keycloak</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres:15.3</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./db-data:/var/lib/postgresql/data/</span>
+      <span class="pi">-</span> <span class="s">./sql:/docker-entrypoint-initdb.d/:ro</span>
+    <span class="na">env_file</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">./keycloak-postgres.env</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">5432:5432"</span>
+  <span class="na">pgadmin</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">pgadmin_keycloak</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">dpage/pgadmin4:7.5</span>
+    <span class="na">env_file</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./keycloak-postgres.env</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">5050:80"</span>
+
+  <span class="na">keycloak</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">keycloak</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/keycloak/keycloak:24.0.4</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">command</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">start --optimized</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">postgres"</span>
+    <span class="na">env_file</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./keycloak-postgres.env</span>
+    <span class="c1">#ports:</span>
+      <span class="c1">#- "127.0.0.1:8080:8080"</span>
+      <span class="c1">#- "127.0.0.1:8787:8787" # debug port</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./imports:/opt/jboss/keycloak/imports</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">keycloak-postgres.env</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="properties"><span class="c"># rename this file to keycloak-postgres.env after adjusting values
+</span>
+<span class="c"># keycloak
+</span><span class="py">KEYCLOAK_ADMIN</span><span class="p">=</span><span class="s">admin</span>
+<span class="py">KEYCLOAK_ADMIN_PASSWORD</span><span class="p">=</span><span class="s">&lt;keycloak-admin-password&gt;</span>
+<span class="py">KC_DB_PASSWORD</span><span class="p">=</span><span class="s">&lt;postgres-db-pw&gt; # should be same as POSTGRES_PASSWORD</span>
+<span class="c">#KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/quarkus-realm.json
+</span>
+<span class="c"># postgres
+</span><span class="py">POSTGRES_PASSWORD</span><span class="p">=</span><span class="s">&lt;postgres-db-pw&gt;</span>
+
+<span class="c"># postgres-pgadmin
+</span><span class="py">PGADMIN_DEFAULT_EMAIL</span><span class="p">=</span><span class="s">&lt;your-email&gt;</span>
+<span class="py">PGADMIN_DEFAULT_PASSWORD</span><span class="p">=</span><span class="s">&lt;pgadmin-pw&gt;</span></code></pre>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-05-21 10:50:44 UTC
+Last updated 2024-05-27 19:30:55 UTC
 </div>
 </div>
 </body>
