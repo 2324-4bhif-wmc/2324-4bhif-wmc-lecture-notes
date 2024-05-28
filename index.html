@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.22">
+<meta name="author" content="Thomas Stütz">
 <link rel="icon" type="image/png" href="themes/favicon.png">
 <title>23/24 4bhif wmc - Lecture Notes</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -553,6 +554,12 @@ pre.rouge .gs {
 <body class="article toc2 toc-left">
 <div id="header">
 <h1>23/24 4bhif wmc - Lecture Notes</h1>
+<div class="details">
+<span id="author" class="author">Thomas Stütz</span><br>
+<span id="revnumber">version 1.0.0,</span>
+<span id="revdate">2024-05-28</span>
+<br><span id="revremark">Lecture Notes for Courses at HTL Leonding</span>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -690,6 +697,7 @@ pre.rouge .gs {
 <li><a href="#_2024_04_16_angular_httpclient">8. 2024-04-16 Angular HttpClient</a></li>
 <li><a href="#_2024_05_21_android">9. 2024-05-21 Android</a></li>
 <li><a href="#_2024_05_27_filter_interceptors_keycloak">10. 2024-05-27 Filter, Interceptors, keycloak</a></li>
+<li><a href="#_2024_05_28_viewmodel_in_android">11. 2024-05-28 ViewModel in Android</a></li>
 </ul>
 </li>
 </ul>
@@ -2140,10 +2148,14 @@ class Repository {
 <p>Möglichkeit 3: JOINED &#8594; Attribute der Basisklasse in einer
 Tabelle und je eine Tabelle pro
 abgeleiteter Klasse (mit
-Diskriminator* DTYPE)</p>
+Diskriminator DTYPE)</p>
 </div>
-<div class="paragraph">
-<p><em>*Diskriminator = Unterscheidungsmerkmal</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Diskriminator: Unterscheidungsmerkmal</em></p>
+</li>
+</ul>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3331,7 +3343,7 @@ ng g c components/todo</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>http-client hat fetch gegenüber den Vorteil, dass gute Infrastruktur wir JWT support und middleware zum debuggen</p>
+<p>http-client hat fetch gegenüber den Vorteil, dass gute Infrastruktur mit JWT support und middleware zum debuggen</p>
 </li>
 </ul>
 </div>
@@ -3423,10 +3435,66 @@ ng g c components/todo</pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2024_05_28_viewmodel_in_android"><a class="anchor" href="#_2024_05_28_viewmodel_in_android"></a>11. 2024-05-28 ViewModel in Android</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/viewmodel.png" alt="viewmodel">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://medium.com/sahibinden-technology/package-by-layer-vs-package-by-feature-7e89cde2ae3a" target="_blank" rel="noopener">Package by Layer vs Package by Feature</a></p>
+</li>
+<li>
+<p><a href="https://medium.com/androiddevelopers/under-the-hood-of-jetpack-compose-part-2-of-2-37b2c20c6cdd" target="_blank" rel="noopener">Under the hood of Jetpack Compose — part 2 of 2</a></p>
+</li>
+<li>
+<p>Anmerkungen zur <a href="https://github.com/caberger/android" target="_blank" rel="noopener">Prof. Abergers Android-App</a></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Einführung des MVVM - Design Patterns, ein ViewModel pro View. Damit das verständlich wird vorher unbedingt die ersten 17 Minuten von <a href="https://www.youtube.com/watch?v=W1ymVx6dmvc" class="bare">https://www.youtube.com/watch?v=W1ymVx6dmvc</a> ansehen. Hierbei im Kopf "Swift" durch „Java" ersetzen und "SwiftUI" durch "Jetpack Compose".</p>
+</li>
+<li>
+<p>Read Only State: In den ViewModels (Todo, Home, TabScreen) sind die Models jetzt Java Records, also readonly, damit sind die 3 Design Prinzipien OK (<a href="https://redux.js.org/understanding/thinking-in-redux/three-principles" class="bare">https://redux.js.org/understanding/thinking-in-redux/three-principles</a>)</p>
+</li>
+<li>
+<p>Es gibt jetzt eine saubere Preview - Architektur für alle Views und das obwohl alles in Java und nicht in Kolin geschrieben ist (mit Ausnahme der Jetpack @Composables).</p>
+</li>
+<li>
+<p>Verbesserungen bei der Android - Implementierung (util Package) für:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>RestEasy Client f. Android,</p>
+</li>
+<li>
+<p>Microprofile config (=application.properties f. Android),</p>
+</li>
+<li>
+<p>Jakarta Dependency Injection (@Inject für Android) und</p>
+</li>
+<li>
+<p>RxJava (<a href="https://rxmarbles.com" class="bare">https://rxmarbles.com</a> für Android).</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-05-27 19:48:31 UTC
+Version 1.0.0<br>
+Last updated 2024-05-28 18:44:44 UTC
 </div>
 </div>
 </body>
