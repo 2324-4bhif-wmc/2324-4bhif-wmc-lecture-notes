@@ -557,7 +557,7 @@ pre.rouge .gs {
 <div class="details">
 <span id="author" class="author">Thomas Stütz</span><br>
 <span id="revnumber">version 1.0.0,</span>
-<span id="revdate">2024-05-28</span>
+<span id="revdate">2024-06-03</span>
 <br><span id="revremark">Lecture Notes for Courses at HTL Leonding</span>
 </div>
 <div id="toc" class="toc2">
@@ -698,6 +698,8 @@ pre.rouge .gs {
 <li><a href="#_2024_05_21_android">9. 2024-05-21 Android</a></li>
 <li><a href="#_2024_05_27_filter_interceptors_keycloak">10. 2024-05-27 Filter, Interceptors, keycloak</a></li>
 <li><a href="#_2024_05_28_viewmodel_in_android">11. 2024-05-28 ViewModel in Android</a></li>
+<li><a href="#_2024_05_21_keycloak">12. 2024-05-21 Keycloak</a></li>
+<li><a href="#_2024_06_03_keycloak">13. 2024-06-03 - Keycloak</a></li>
 </ul>
 </li>
 </ul>
@@ -3490,11 +3492,146 @@ ng g c components/todo</pre>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_2024_05_21_keycloak"><a class="anchor" href="#_2024_05_21_keycloak"></a>12. 2024-05-21 Keycloak</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>IAM - Identity and Access Management</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Authentification (Wer bin ich?)</p>
+</li>
+<li>
+<p>Authorization (Was darf ich?)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Alternativen zu Keycloak</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Authentik</p>
+</li>
+<li>
+<p>Authelia</p>
+</li>
+<li>
+<p>Auth0 (kommerziell)</p>
+</li>
+<li>
+<p>Okta (kommerziell)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Hosting-Varianten</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Hosting on-premise</p>
+</li>
+<li>
+<p>für jedes deployment (k8s) einen eigenen keycloak Server</p>
+</li>
+<li>
+<p>externes Hosting</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Quellen</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.youtube.com/watch?v=6ye4lP9EA2Y" class="bare">https://www.youtube.com/watch?v=6ye4lP9EA2Y</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_2024_06_03_keycloak"><a class="anchor" href="#_2024_06_03_keycloak"></a>13. 2024-06-03 - Keycloak</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Beispielsprojekt: /labs/keycloak-demo</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">docker-compose.yaml</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="yaml"><span class="na">services</span><span class="pi">:</span>
+  <span class="na">postgres</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">postgres_keycloak</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">postgres:15.3</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./db-data:/var/lib/postgresql/data/</span>
+      <span class="pi">-</span> <span class="s">./sql:/docker-entrypoint-initdb.d/:ro</span>
+    <span class="na">env_file</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./keycloak-postgres.env</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">5432:5432"</span>
+  <span class="na">pgadmin</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">pgadmin_keycloak</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">dpage/pgadmin4:7.5</span>
+    <span class="na">env_file</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./keycloak-postgres.env</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">5050:80"</span>
+
+  <span class="na">keycloak</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">keycloak</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">quay.io/keycloak/keycloak:24.0.4</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">command</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">start-dev</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">postgres"</span>
+    <span class="na">env_file</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./keycloak-postgres.env</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">127.0.0.1:8090:8080"</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">127.0.0.1:8787:8787"</span> <span class="c1"># debug port</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./imports:/opt/jboss/keycloak/imports</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">keycloak-postgres.env</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="properties"><span class="c"># keycloak
+</span><span class="py">KEYCLOAK_ADMIN</span><span class="p">=</span><span class="s">admin</span>
+<span class="py">KEYCLOAK_ADMIN_PASSWORD</span><span class="p">=</span><span class="s">passme</span>
+<span class="py">KC_DB_PASSWORD</span><span class="p">=</span><span class="s">passme # should be same as POSTGRES_PASSWORD</span>
+<span class="c">#KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/quarkus-realm.json
+</span>
+<span class="c"># postgres
+</span><span class="py">POSTGRES_PASSWORD</span><span class="p">=</span><span class="s">passme</span>
+
+<span class="c"># postgres-pgadmin
+</span><span class="py">PGADMIN_DEFAULT_EMAIL</span><span class="p">=</span><span class="s">x.y@htl-leonding.ac.at</span>
+<span class="py">PGADMIN_DEFAULT_PASSWORD</span><span class="p">=</span><span class="s">passme</span></code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2024-05-28 18:44:44 UTC
+Last updated 2024-06-03 13:34:44 UTC
 </div>
 </div>
 </body>
